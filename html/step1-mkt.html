@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>마케팅 1차 실습 — 채널별 설정값 준비</title>
+<style>@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f8fafc;color:#1f2937;line-height:1.65;
+    font-family:"Presentation","Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;font-size:16px}
+  h1,h2,h3,.grp,.card .nm,.guide .t,.rules .t,.who,.tab,.box .nm{
+    font-family:"Paperozi","Presentation","Malgun Gothic",system-ui,sans-serif}
+  .wrap{max-width:680px;margin:0 auto;padding:16px 18px 60px}
+  .wide .wrap{max-width:1560px}
+  a{color:#1d4ed8;text-decoration:none}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;
+    color:#4b5563;background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:6px 14px;margin:4px 0 14px}
+  .chip{display:inline-block;border-radius:6px;color:#fff;font-size:12px;font-weight:700;padding:2px 8px}
+  h1{font-size:23px;margin:6px 0 2px;line-height:1.35}
+  .meta{color:#6b7280;font-size:14px;margin-bottom:14px}
+  .guide{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px 16px;margin:14px 0 20px}
+  .guide .t{font-weight:800;font-size:14px;margin-bottom:6px}
+  .guide ul,.guide ol{margin:0;padding-left:18px;font-size:14px}
+  .guide li{margin:3px 0;word-break:keep-all}
+  .guide b{color:#b45309}
+  h2{font-size:18px;margin:26px 0 8px;padding-left:10px;border-left:4px solid #cbd5e1}
+  .qa{margin:12px 0}
+  .who{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+  .q .who{color:#6b7280}
+  .a .who{color:#1d4ed8}
+  .q p,.a p{margin:0;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 14px}
+  .a p{background:#eff6ff;border-color:#bfdbfe}
+  .foot{margin-top:34px;padding-top:14px;border-top:1px solid #e5e7eb;text-align:center}
+  .lead{color:#4b5563;font-size:15px;margin:4px 0 18px}
+  .rules{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 18px;margin-bottom:22px}
+  .rules .t{font-weight:800;margin-bottom:8px}
+  .rules ol,.rules ul{margin:0;padding-left:20px;font-size:14.5px}
+  .rules li{margin:6px 0;word-break:keep-all}
+  .grp{font-size:16px;font-weight:800;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+  .card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;margin:10px 0;color:inherit}
+  .card .nm{font-weight:800;font-size:16.5px}
+  .card .who2{color:#6b7280;font-size:14px;margin-top:2px}
+  .card .l5{color:#92400e;font-size:13px;margin-top:6px;word-break:keep-all}
+  .card .go{float:right;color:#9ca3af;font-size:18px}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+  .links a{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+  .tab{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;color:#fff;opacity:.55}
+  .tab.on{opacity:1;box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor}
+  .panel{display:none}
+  .panel.on{display:block}
+
+  .pyr{margin:10px 0 30px}
+  .pyr .row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+  .pyr .grps{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:flex-start}
+  .pyr .g3{flex:1 1 300px;min-width:0;max-width:480px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .pyr .kids{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .box{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1.5px solid #cbd5e1;border-radius:10px;padding:7px 10px;font-size:14px;line-height:1.4;word-break:keep-all;min-width:0}
+  .box .lv{flex:none;border-radius:6px;color:#fff;font-size:11px;font-weight:800;padding:1px 6px;margin-top:2px}
+  .box.l1,.box.l2{font-weight:800;font-size:15px;min-width:min(220px,100%);justify-content:center}
+  .box.l3{font-weight:800;background:#f0fdf4}
+  .box.l4{background:#fffbeb}
+  .box.l4.hot{border:3px solid #a16207;background:#fef3c7;font-weight:800}
+  .box.l5{background:#faf5ff;font-size:13px;margin-left:22px}
+  .box.l5.star{border:2.5px solid #9333ea;font-weight:800}
+  .pyr .l5s{display:flex;flex-direction:column;gap:4px;margin:4px 0 2px}
+  .ans .l6s{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-top:10px}
+  .ans .l6g{flex:1 1 320px;min-width:0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .ans .box.l6{background:#fdf2f8;font-weight:800}
+  .ans .out{font-size:12.5px;color:#9d174d;margin:4px 0 6px 4px}
+  .ans .l7{display:flex;gap:8px;align-items:flex-start;border:1.5px solid #fecaca;background:#fff;border-radius:10px;padding:6px 10px;margin:6px 0;font-size:13.5px}
+  .ans .ev{display:block;color:#6b7280;font-size:12px;margin-top:2px}
+  .ans .wrong{background:#f1f5f9;border:1px dashed #94a3b8;border-radius:10px;padding:8px 12px;font-size:13px;margin-top:10px}
+  .ans .wrong b{color:#475569}
+
+  .tabs.v2{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0 18px}
+  .tabs.v2 .tab{opacity:1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;
+    padding:9px 8px;border-radius:10px;font-size:15px;line-height:1.2;word-break:keep-all;cursor:pointer;
+    background:#fff;color:var(--c);border:2px solid var(--c);box-shadow:0 3px 0 #cbd5e1;
+    transition:transform .08s,box-shadow .08s,background .12s}
+  .tabs.v2 .tab:hover{background:color-mix(in srgb,var(--c) 10%,#fff)}
+  .tabs.v2 .tab:active{transform:translateY(2px);box-shadow:0 1px 0 #cbd5e1}
+  .tabs.v2 .tab.on{background:var(--c);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.28)}
+  .pyr .top{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 16px;padding-bottom:14px;border-bottom:1px dashed #cbd5e1}
+  .pyr .vc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .pyr .vc .l2s{display:flex;flex-direction:row;gap:6px;padding:6px 6px 0;margin:0 6px;border-top:2px solid #e5e7eb}
+  .pyr .vc .box{min-width:0;justify-content:center;font-size:14px}
+  .pyr .vc .l2s .box{flex:1 1 0}
+  .pyr .vc .box.l1{font-size:15px}
+  .pyr .vc .box.own{border-width:2.5px;border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 18%,transparent)}
+  .pyr .vc a.box{color:inherit;cursor:pointer;box-shadow:0 2px 0 #cbd5e1}
+  .pyr .vc a.box:hover{border-color:#94a3b8;background:#fff}
+  .pyr .vc a.box:active{transform:translateY(1px);box-shadow:none}
+  .box.dim{color:#9ca3af;background:#f3f4f6;border-color:#e5e7eb;font-weight:600}
+  .box.dim .lv{background:#b0b7c3!important}
+  .pyr .vc.dim .l2s{border-top-color:#eef0f3}
+  .pyr .hint{font-size:12.5px;color:#6b7280;text-align:center;margin:-8px 0 14px}
+  @media (max-width:640px){
+    .tabs.v2{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .tabs.v2 .tab{font-size:14px;padding:8px 4px;min-height:40px}
+    .pyr .top{flex-direction:column;align-items:stretch}
+    .pyr .vc{flex:1 1 auto}
+    .pyr .vc .box{font-size:13px;padding:6px 8px}
+    .pyr .vc a.box.l2{min-height:42px;align-items:center}
+    .pyr .vc .box.l1{font-size:14px}
+  }
+
+  .path{margin:4px 0 12px}
+  .path .row{margin:0 0 6px}
+  .path .row .box{flex:0 1 auto;margin:0}
+  .path .row .box.own{border-width:2.5px;font-weight:800}
+  .path .row .box.l1,.path .row .box.l2{min-width:0;font-size:14.5px}
+  .path .row .box.l1.own,.path .row .box.l2.own{border-color:var(--c)}
+  .path .row .box.l3.own{border-color:#16a34a}
+  .path .row .box.l4.own{border-color:#a16207}
+  .box.l5.cur{border:2.5px solid #9333ea;background:#f3e8ff;font-weight:800}
+  .path .chain{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:10px}
+  .path .chain .arrow{color:#94a3b8;font-weight:800}
+  .path .chain .box{flex:0 1 auto}
+  .pyr .vc .box.own{box-shadow:none}
+  h1+.path{margin-top:0}
+  /* 트리 */
+  .tree{margin:14px auto 26px;max-width:960px}
+  .grp.sep{border-top:1px solid #e5e7eb;padding-top:16px;margin-top:26px}
+  .tree .root{display:flex;justify-content:center}
+  .tree .root .box{min-width:0;margin:0;font-weight:800}
+  .tree .l6cols{display:flex;gap:18px;align-items:flex-start;justify-content:center;position:relative;padding-top:18px}
+  .tree .l6col{flex:1 1 0;min-width:0;position:relative;padding-top:18px}
+  .tree .l6col::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .l6col::after{content:"";position:absolute;top:0;height:2px;background:#94a3b8;left:0;right:0}
+  .tree .l6col:first-child::after{left:50%}
+  .tree .l6col:last-child::after{right:50%}
+  .tree .l6col:only-child::after{display:none}
+  .tree .l6cols::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .box.l6{background:#fdf2f8;font-weight:800;justify-content:flex-start;min-height:42px}
+  .tree .l7s{position:relative;margin:8px 0 0 22px;padding-left:16px;display:flex;flex-direction:column;gap:6px}
+  .tree .l7s::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:#94a3b8}
+  .tree .l7{position:relative}
+  .tree .l7::before{content:"";position:absolute;left:-16px;top:19px;width:16px;height:2px;background:#94a3b8}
+  .tree .l7:last-child::after{content:"";position:absolute;left:-17px;top:21px;bottom:-8px;width:4px;background:#f8fafc}
+  .tree .l7 .box{min-height:38px;font-size:13.5px}
+  .tree .l7 .box.l7{background:#fff;border-color:#fecaca}
+  .tree .box.blank{background:#fff;border-style:dashed;color:#cbd5e1}
+  .tree .box.blank .nm{flex:1;min-height:18px}
+  .tree .out{font-size:12.5px;color:#9d174d;margin:4px 0 0 4px}
+  /* 근거 (?) */
+  .ev{display:none;font-size:12.5px;color:#475569;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:5px 9px;margin:4px 0 0 4px;word-break:keep-all}
+  .ev b{color:#1f2937}
+  .show-ev .ev{display:block}
+  .qbtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    border:2px solid #475569;background:#fff;color:#475569;font-weight:800;font-size:16px;cursor:pointer;margin-left:8px;vertical-align:middle}
+  .qbtn.on{background:#475569;color:#fff}
+  .qrow{display:flex;align-items:center;gap:8px;margin:14px 0 6px;font-weight:800;font-size:15px}
+  .qrow .hint2{font-weight:500;color:#6b7280;font-size:13px}
+  /* 병목·지연·낭비 마킹 */
+  .bdw{display:inline-block;flex:none;border-radius:6px;font-size:11px;font-weight:800;padding:1px 6px;margin-left:6px;color:#fff;letter-spacing:.02em}
+  .bdw-B{background:#dc2626}.bdw-D{background:#ca8a04}.bdw-W{background:#2563eb}
+  .box.has-B{border-color:#dc2626;background:#fee2e2}
+  .box.has-D{border-color:#ca8a04;background:#fef9c3}
+  .box.has-W{border-color:#2563eb;background:#dbeafe}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:#4b5563;margin:4px 0 14px}
+  .legend span{display:inline-flex;align-items:center;gap:4px}
+  /* 카드(2차) */
+  .cards{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+  details.card{padding:0;overflow:hidden}
+  details.card summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  details.card summary::-webkit-details-marker{display:none}
+  details.card summary .no{flex:none;border-radius:8px;background:#1f2937;color:#fff;font-weight:800;font-size:13px;padding:3px 9px}
+  details.card summary .nm{font-weight:800;font-size:16px}
+  details.card summary .sub{color:#6b7280;font-size:13.5px;width:100%;word-break:keep-all}
+  details.card summary .done{background:#dcfce7;color:#166534;border-radius:999px;font-size:12px;font-weight:800;padding:2px 9px}
+  details.card summary .open{margin-left:auto;color:#9ca3af;font-size:13px}
+  details.card[open] summary{border-bottom:1px solid #e5e7eb;background:#f8fafc}
+  details.card .body{padding:6px 16px 14px}
+  .step{display:inline-block;background:#1f2937;color:#fff;border-radius:999px;font-size:12px;font-weight:800;padding:2px 10px;margin-bottom:6px}
+  @media (max-width:640px){
+    /* 경로: 들여쓰기 목록 — 줄마다 한 단씩 들여 쓰고 왼쪽 레일·꺾은선으로 "위 줄의 자식"을 보인다 */
+    .path .row{justify-content:flex-start;gap:6px;position:relative;margin:0 0 2px;padding:3px 0 3px 14px}
+    .path .row .box{font-size:13px;padding:5px 8px}
+    .path .row .box.l1,.path .row .box.l2{font-size:13.5px}
+    .path .row.r1{padding-left:0}
+    .path .row .box.own,.path .row .box.cur{order:-1}   /* 자기 상자를 줄 맨 앞에 — 꺾은선이 그 상자에 닿는다 */
+    .path .row.r3{margin-left:14px}.path .row.r4{margin-left:28px}.path .row.r5{margin-left:42px}
+    .path .row:not(.r1)::before{content:"";position:absolute;left:0;top:-8px;width:2px;height:28px;background:#cbd5e1}
+    .path .row:not(.r1)::after{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:#cbd5e1}
+    .tree .l6cols{flex-direction:column;gap:14px;padding-top:0}
+    .tree .l6cols::before{display:none}
+    .tree .l6col{padding-top:0;padding-left:18px}
+    .tree .l6col::before{left:6px;top:-14px;height:calc(100% + 14px);width:2px}
+    .tree .l6col::after{top:21px;left:6px;right:auto;width:12px;height:2px}
+    .tree .l6col:first-child::after,.tree .l6col:last-child::after{left:6px;right:auto}
+    .tree .l6col:last-child::before{height:35px}
+    .tree .l7s{margin-left:14px}
+  }
+</style>
+</head>
+<body><div class="wrap">
+<a class="back" href="index.html">← 1차 실습 안내로</a>
+<span class="step">1차 실습 · 마케팅</span>
+<h1>"[L5]채널별 설정값 준비"을 L6, L7 으로 분해합니다.</h1>
+<div class="path pyr" style="--c:#15803d"><div class="row r1"><div class="box l1 own"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">시장·고객 이해</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">상품 개발</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">공급·생산</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">판매·서비스</span></div></div><div class="row r2"><div class="box l2 own"><span class="lv" style="background:#0e7490">L2</span><span class="nm">마케팅</span></div></div><div class="row r3"><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">콘텐츠 관리</span></div><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">채널 운영</span></div><div class="box l3 own"><span class="lv" style="background:#15803d">L3</span><span class="nm">프로모션 기획</span></div></div><div class="row r4"><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">프로모션 기획·승인</span></div><div class="box l4 own"><span class="lv" style="background:#a16207">L4</span><span class="nm">쿠폰·할인 설정</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">프로모션 성과 분석</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">제휴·이벤트 진행</span></div></div><div class="row r5"><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">채널별 설정값 준비</span></div><div class="box l5 dim"><span class="lv" style="background:#9333ea">L5</span><span class="nm">쿠폰·할인 등록</span></div><div class="box l5 dim"><span class="lv" style="background:#9333ea">L5</span><span class="nm">설정 검증·오류 정정</span></div><div class="box l5 dim"><span class="lv" style="background:#9333ea">L5</span><span class="nm">매장 공지·반영 확인</span></div></div></div>
+<div class="grp sep">L5를 L6, L7으로 분해해주세요</div>
+<div class="tree"><div class="root"><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">채널별 설정값 준비</span></div></div><div class="l6cols"><div class="l6col"><div class="box l6"><span class="lv" style="background:#be185d">L6</span><span class="nm">프로모션 조건 확인</span></div><div class="l7s"><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7"><span class="lv" style="background:#b91c1c">L7</span><span class="nm">사용 기간과 중복 사용 여부를 정한다</span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div></div></div><div class="l6col"><div class="box l6 blank"><span class="lv" style="background:#be185d">L6</span><span class="nm"></span></div><div class="l7s"><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7"><span class="lv" style="background:#b91c1c">L7</span><span class="nm">확정 조건을 채널별 입력 항목에 맞춰 옮긴다</span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div></div></div></div></div>
+<div class="grp sep">인터뷰</div>
+<div class="meta">백지훈 사원 (프로모션 담당, 2년차) · 유가온 과장 (채널·배달앱 담당, 7년차) · 신도현 대리 (콘텐츠 담당, 4년차) · 인터뷰어: AX 컨설턴트</div>
+<h2 id="l5-1">1. 채널별 설정값 준비</h2><div class="qa q"><span class="who">컨설턴트</span><p>세 분이 쿠폰 하나로 같이 움직이신다고 들었습니다. 쿠폰 한 건이 어디서부터 시작되나요?</p></div><div class="qa a"><span class="who">백지훈</span><p>기획서요. 승인 난 기획서에서 조건부터 뽑아요. 큰 프로모션은 한 달에 하나인데, 거기 딸린 쿠폰하고 상시로 도는 쿠폰까지 치면 한 달에 스물다섯 건쯤 돼요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>기획서 승인은 얼마나 걸리나요?</p></div><div class="qa a"><span class="who">백지훈</span><p>팀장님, 본부장님 순서로 올라가는데 기획안 승인이 평균 사흘은 걸려요. 길면 일주일 넘게도 가고요. 승인이 안 나면 조건이 안 정해지니까 저는 손을 놓고 있어요. 15%로 올렸는데 10%로 바뀌어서 내려온 적도 있어서, 미리 해 놓을 수가 없거든요.</p></div><div class="qa a"><span class="who">유가온</span><p>그 사흘 동안은 저도 앱 쪽 일정을 못 잡습니다. B는 행사 쿠폰을 닷새 전까지 신청해야 하거든요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>승인 전에 미리 준비해 두신 적은 없나요?</p></div><div class="qa a"><span class="who">백지훈</span><p>해 봤죠. 작년에 기획서 올리자마자 표부터 만들었는데, 본부장님이 대상 메뉴를 세트에서 단품으로 바꾸셔서 네 장을 다 다시 했어요. 그 뒤로는 안 해요. 그 사흘엔 지난 쿠폰 성과 정리 같은 걸 하고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>조건은 구체적으로 어떤 걸 뽑으시나요?</p></div><div class="qa a"><span class="who">백지훈</span><p>할인율, 적용 메뉴, 최소 주문 금액을 한 줄씩 적어요. 기간하고 중복 되는지 안 되는지도 그때 정하고요. 그다음이 매장이에요. 이번에 빠지는 매장 명단을 받아서 대상에서 빼요. 매번 열 곳 정도? 공사 중이거나 재료가 안 들어오는 데가 꼭 있어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>빠지는 매장 명단은 어디서 받나요?</p></div><div class="qa a"><span class="who">백지훈</span><p>운영팀이요. 쿠폰마다 따로 여쭤봐야 해서 메일 보내 놓고 하루쯤 기다려요. 받고 나서도 바뀌고요. 시작 전날 점장님이 재료 들어왔으니까 다시 넣어 달라고 하신 적도 있어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>쿠폰 이름이나 문구는 누가 정하나요?</p></div><div class="qa a"><span class="who">백지훈</span><p>쿠폰 이름하고 노출 문구는 신 대리님 거랑 맞춰야 돼요. 앱에 쿠폰 이름 칸이 따로 있는데, 배너 문구랑 다르면 손님들이 헷갈려하세요. 근데 대리님 소재가 나와야 그 칸을 채우거든요.</p></div><div class="qa a"><span class="who">신도현</span><p>올해 초에 미리 만들었다가 두 번 버리고 나서는, 승인 나야 시작합니다. 할인율이 바뀌면 다 버려야 하니까요. 제작사에 넘기면 시안 오는 데 하루, 고치면 또 하루예요. 그래서 그 이틀은 지훈 씨 메모에 한 줄이 비어 있는 거고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>조건이 정해지면 바로 등록하시나요?</p></div><div class="qa a"><span class="who">백지훈</span><p>아뇨, 표를 먼저 만들어요. 앱마다 걸 수 있는 조건이 달라서 그것부터 봐요. A는 최소 주문 금액을 천 원 단위로만 걸 수 있고, B는 중복이 아예 안 되고, 시간대 할인은 C만 돼요. 안 되는 조건은 그 앱에 맞게 바꿔서 적어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그 제약은 어디서 확인하시나요?</p></div><div class="qa a"><span class="who">유가온</span><p>앱 설정 페이지에 들어가야 보입니다. 그게 걸려요. 관리자 계정이 제 이름 하나뿐이라 인증번호가 제 휴대폰으로 와요. 지훈 씨가 들어가려면 제가 번호를 불러 줘야 합니다. 제가 외근 나간 날은 표도 멈추고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>앱 제약은 자주 바뀌나요?</p></div><div class="qa a"><span class="who">유가온</span><p>분기에 한 번은 바뀝니다. 앱사에서 공지가 오면 제가 읽고 지훈 씨한테 말로 전해요. 따로 정리해 둔 문서는 없습니다. 제 머리하고 매장별 특이사항 시트 정도예요.</p></div><div class="qa a"><span class="who">신도현</span><p>저도 과장님한테 들어요. C는 쿠폰 이름이 열두 자까지라 문구를 그 길이에 맞춰서 줄여 드리거든요.</p></div><div class="qa a"><span class="who">백지훈</span><p>그래서 표의 C 장에는 대리님이 줄여 주신 문구를 따로 적어요. 다른 두 장이랑 문구가 달라지는 거죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>표는 어떤 모양인가요?</p></div><div class="qa a"><span class="who">백지훈</span><p>앱 세 곳하고 매장 POS까지 네 장이에요. 같은 조건을 앱마다 입력 칸에 맞춰 다시 써요. 칸 이름도 순서도 다 달라서, 쿠폰은 하나인데 표는 네 번 만드는 거예요. 솔직히 처음부터 만들진 않아요. 지난달 엑셀 표를 복사해서 숫자만 고쳐요. 지난 쿠폰이랑 달라진 칸은 빨간색으로 칠해 둬요. 그래도 지난번 걸 복사해서 고치다 보니 안 고친 칸이 남아요.</p></div><div class="qa a"><span class="who">유가온</span><p>제가 입사했을 땐 그 표가 종이 한 장이었어요. 앱도 하나였고요. 그때도 조건을 앱 입력 칸에 맞춰 옮겨 적긴 했어요. 지금은 그걸 네 번 하는 거고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>표를 다 만들면 누가 확인하나요?</p></div><div class="qa a"><span class="who">백지훈</span><p>다 채우면 과장님한테 넘겨서 한 번 봐 달라고 해요.</p></div><div class="qa a"><span class="who">유가온</span><p>저는 앱 쪽 세 장만 봅니다. 지난달에 지훈 씨 옆에서 시간을 재 봤는데, 표 만들고 넣고 확인까지, 쿠폰 하나 설정하는 데 네 시간은 잡아야 돼요. 그중에 제가 붙어 있어야 하는 게 한 시간은 돼서, 신메뉴 주간이랑 겹치면 그날은 다른 일을 못 합니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>과장님은 표에서 주로 무엇을 보시나요?</p></div><div class="qa a"><span class="who">유가온</span><p>앱에서 안 되는 조건이 남아 있는지요. B에 중복 허용이 들어가 있으면 등록할 때 막힙니다. 그걸 등록하다가 알면 그날 일정이 다 밀려요. 빨간 칸부터 보고, 그다음 빠지는 매장 열 곳이 세 장에 똑같이 들어갔는지 봅니다.</p></div>
+<div class="foot"><a class="back" href="index.html">← 1차 실습 안내로</a></div>
+</div></body>
+</html>

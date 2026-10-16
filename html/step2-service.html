@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>고객서비스 2차 실습 — 컴플레인 응대</title>
+<style>@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f8fafc;color:#1f2937;line-height:1.65;
+    font-family:"Presentation","Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;font-size:16px}
+  h1,h2,h3,.grp,.card .nm,.guide .t,.rules .t,.who,.tab,.box .nm{
+    font-family:"Paperozi","Presentation","Malgun Gothic",system-ui,sans-serif}
+  .wrap{max-width:680px;margin:0 auto;padding:16px 18px 60px}
+  .wide .wrap{max-width:1560px}
+  a{color:#1d4ed8;text-decoration:none}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;
+    color:#4b5563;background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:6px 14px;margin:4px 0 14px}
+  .chip{display:inline-block;border-radius:6px;color:#fff;font-size:12px;font-weight:700;padding:2px 8px}
+  h1{font-size:23px;margin:6px 0 2px;line-height:1.35}
+  .meta{color:#6b7280;font-size:14px;margin-bottom:14px}
+  .guide{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px 16px;margin:14px 0 20px}
+  .guide .t{font-weight:800;font-size:14px;margin-bottom:6px}
+  .guide ul,.guide ol{margin:0;padding-left:18px;font-size:14px}
+  .guide li{margin:3px 0;word-break:keep-all}
+  .guide b{color:#b45309}
+  h2{font-size:18px;margin:26px 0 8px;padding-left:10px;border-left:4px solid #cbd5e1}
+  .qa{margin:12px 0}
+  .who{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+  .q .who{color:#6b7280}
+  .a .who{color:#1d4ed8}
+  .q p,.a p{margin:0;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 14px}
+  .a p{background:#eff6ff;border-color:#bfdbfe}
+  .foot{margin-top:34px;padding-top:14px;border-top:1px solid #e5e7eb;text-align:center}
+  .lead{color:#4b5563;font-size:15px;margin:4px 0 18px}
+  .rules{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 18px;margin-bottom:22px}
+  .rules .t{font-weight:800;margin-bottom:8px}
+  .rules ol,.rules ul{margin:0;padding-left:20px;font-size:14.5px}
+  .rules li{margin:6px 0;word-break:keep-all}
+  .grp{font-size:16px;font-weight:800;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+  .card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;margin:10px 0;color:inherit}
+  .card .nm{font-weight:800;font-size:16.5px}
+  .card .who2{color:#6b7280;font-size:14px;margin-top:2px}
+  .card .l5{color:#92400e;font-size:13px;margin-top:6px;word-break:keep-all}
+  .card .go{float:right;color:#9ca3af;font-size:18px}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+  .links a{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+  .tab{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;color:#fff;opacity:.55}
+  .tab.on{opacity:1;box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor}
+  .panel{display:none}
+  .panel.on{display:block}
+
+  .pyr{margin:10px 0 30px}
+  .pyr .row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+  .pyr .grps{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:flex-start}
+  .pyr .g3{flex:1 1 300px;min-width:0;max-width:480px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .pyr .kids{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .box{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1.5px solid #cbd5e1;border-radius:10px;padding:7px 10px;font-size:14px;line-height:1.4;word-break:keep-all;min-width:0}
+  .box .lv{flex:none;border-radius:6px;color:#fff;font-size:11px;font-weight:800;padding:1px 6px;margin-top:2px}
+  .box.l1,.box.l2{font-weight:800;font-size:15px;min-width:min(220px,100%);justify-content:center}
+  .box.l3{font-weight:800;background:#f0fdf4}
+  .box.l4{background:#fffbeb}
+  .box.l4.hot{border:3px solid #a16207;background:#fef3c7;font-weight:800}
+  .box.l5{background:#faf5ff;font-size:13px;margin-left:22px}
+  .box.l5.star{border:2.5px solid #9333ea;font-weight:800}
+  .pyr .l5s{display:flex;flex-direction:column;gap:4px;margin:4px 0 2px}
+  .ans .l6s{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-top:10px}
+  .ans .l6g{flex:1 1 320px;min-width:0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .ans .box.l6{background:#fdf2f8;font-weight:800}
+  .ans .out{font-size:12.5px;color:#9d174d;margin:4px 0 6px 4px}
+  .ans .l7{display:flex;gap:8px;align-items:flex-start;border:1.5px solid #fecaca;background:#fff;border-radius:10px;padding:6px 10px;margin:6px 0;font-size:13.5px}
+  .ans .ev{display:block;color:#6b7280;font-size:12px;margin-top:2px}
+  .ans .wrong{background:#f1f5f9;border:1px dashed #94a3b8;border-radius:10px;padding:8px 12px;font-size:13px;margin-top:10px}
+  .ans .wrong b{color:#475569}
+
+  .tabs.v2{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0 18px}
+  .tabs.v2 .tab{opacity:1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;
+    padding:9px 8px;border-radius:10px;font-size:15px;line-height:1.2;word-break:keep-all;cursor:pointer;
+    background:#fff;color:var(--c);border:2px solid var(--c);box-shadow:0 3px 0 #cbd5e1;
+    transition:transform .08s,box-shadow .08s,background .12s}
+  .tabs.v2 .tab:hover{background:color-mix(in srgb,var(--c) 10%,#fff)}
+  .tabs.v2 .tab:active{transform:translateY(2px);box-shadow:0 1px 0 #cbd5e1}
+  .tabs.v2 .tab.on{background:var(--c);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.28)}
+  .pyr .top{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 16px;padding-bottom:14px;border-bottom:1px dashed #cbd5e1}
+  .pyr .vc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .pyr .vc .l2s{display:flex;flex-direction:row;gap:6px;padding:6px 6px 0;margin:0 6px;border-top:2px solid #e5e7eb}
+  .pyr .vc .box{min-width:0;justify-content:center;font-size:14px}
+  .pyr .vc .l2s .box{flex:1 1 0}
+  .pyr .vc .box.l1{font-size:15px}
+  .pyr .vc .box.own{border-width:2.5px;border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 18%,transparent)}
+  .pyr .vc a.box{color:inherit;cursor:pointer;box-shadow:0 2px 0 #cbd5e1}
+  .pyr .vc a.box:hover{border-color:#94a3b8;background:#fff}
+  .pyr .vc a.box:active{transform:translateY(1px);box-shadow:none}
+  .box.dim{color:#9ca3af;background:#f3f4f6;border-color:#e5e7eb;font-weight:600}
+  .box.dim .lv{background:#b0b7c3!important}
+  .pyr .vc.dim .l2s{border-top-color:#eef0f3}
+  .pyr .hint{font-size:12.5px;color:#6b7280;text-align:center;margin:-8px 0 14px}
+  @media (max-width:640px){
+    .tabs.v2{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .tabs.v2 .tab{font-size:14px;padding:8px 4px;min-height:40px}
+    .pyr .top{flex-direction:column;align-items:stretch}
+    .pyr .vc{flex:1 1 auto}
+    .pyr .vc .box{font-size:13px;padding:6px 8px}
+    .pyr .vc a.box.l2{min-height:42px;align-items:center}
+    .pyr .vc .box.l1{font-size:14px}
+  }
+
+  .path{margin:4px 0 12px}
+  .path .row{margin:0 0 6px}
+  .path .row .box{flex:0 1 auto;margin:0}
+  .path .row .box.own{border-width:2.5px;font-weight:800}
+  .path .row .box.l1,.path .row .box.l2{min-width:0;font-size:14.5px}
+  .path .row .box.l1.own,.path .row .box.l2.own{border-color:var(--c)}
+  .path .row .box.l3.own{border-color:#16a34a}
+  .path .row .box.l4.own{border-color:#a16207}
+  .box.l5.cur{border:2.5px solid #9333ea;background:#f3e8ff;font-weight:800}
+  .path .chain{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:10px}
+  .path .chain .arrow{color:#94a3b8;font-weight:800}
+  .path .chain .box{flex:0 1 auto}
+  .pyr .vc .box.own{box-shadow:none}
+  h1+.path{margin-top:0}
+  /* 트리 */
+  .tree{margin:14px auto 26px;max-width:960px}
+  .grp.sep{border-top:1px solid #e5e7eb;padding-top:16px;margin-top:26px}
+  .tree .root{display:flex;justify-content:center}
+  .tree .root .box{min-width:0;margin:0;font-weight:800}
+  .tree .l6cols{display:flex;gap:18px;align-items:flex-start;justify-content:center;position:relative;padding-top:18px}
+  .tree .l6col{flex:1 1 0;min-width:0;position:relative;padding-top:18px}
+  .tree .l6col::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .l6col::after{content:"";position:absolute;top:0;height:2px;background:#94a3b8;left:0;right:0}
+  .tree .l6col:first-child::after{left:50%}
+  .tree .l6col:last-child::after{right:50%}
+  .tree .l6col:only-child::after{display:none}
+  .tree .l6cols::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .box.l6{background:#fdf2f8;font-weight:800;justify-content:flex-start;min-height:42px}
+  .tree .l7s{position:relative;margin:8px 0 0 22px;padding-left:16px;display:flex;flex-direction:column;gap:6px}
+  .tree .l7s::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:#94a3b8}
+  .tree .l7{position:relative}
+  .tree .l7::before{content:"";position:absolute;left:-16px;top:19px;width:16px;height:2px;background:#94a3b8}
+  .tree .l7:last-child::after{content:"";position:absolute;left:-17px;top:21px;bottom:-8px;width:4px;background:#f8fafc}
+  .tree .l7 .box{min-height:38px;font-size:13.5px}
+  .tree .l7 .box.l7{background:#fff;border-color:#fecaca}
+  .tree .box.blank{background:#fff;border-style:dashed;color:#cbd5e1}
+  .tree .box.blank .nm{flex:1;min-height:18px}
+  .tree .out{font-size:12.5px;color:#9d174d;margin:4px 0 0 4px}
+  /* 근거 (?) */
+  .ev{display:none;font-size:12.5px;color:#475569;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:5px 9px;margin:4px 0 0 4px;word-break:keep-all}
+  .ev b{color:#1f2937}
+  .show-ev .ev{display:block}
+  .qbtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    border:2px solid #475569;background:#fff;color:#475569;font-weight:800;font-size:16px;cursor:pointer;margin-left:8px;vertical-align:middle}
+  .qbtn.on{background:#475569;color:#fff}
+  .qrow{display:flex;align-items:center;gap:8px;margin:14px 0 6px;font-weight:800;font-size:15px}
+  .qrow .hint2{font-weight:500;color:#6b7280;font-size:13px}
+  /* 병목·지연·낭비 마킹 */
+  .bdw{display:inline-block;flex:none;border-radius:6px;font-size:11px;font-weight:800;padding:1px 6px;margin-left:6px;color:#fff;letter-spacing:.02em}
+  .bdw-B{background:#dc2626}.bdw-D{background:#ca8a04}.bdw-W{background:#2563eb}
+  .box.has-B{border-color:#dc2626;background:#fee2e2}
+  .box.has-D{border-color:#ca8a04;background:#fef9c3}
+  .box.has-W{border-color:#2563eb;background:#dbeafe}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:#4b5563;margin:4px 0 14px}
+  .legend span{display:inline-flex;align-items:center;gap:4px}
+  /* 카드(2차) */
+  .cards{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+  details.card{padding:0;overflow:hidden}
+  details.card summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  details.card summary::-webkit-details-marker{display:none}
+  details.card summary .no{flex:none;border-radius:8px;background:#1f2937;color:#fff;font-weight:800;font-size:13px;padding:3px 9px}
+  details.card summary .nm{font-weight:800;font-size:16px}
+  details.card summary .sub{color:#6b7280;font-size:13.5px;width:100%;word-break:keep-all}
+  details.card summary .done{background:#dcfce7;color:#166534;border-radius:999px;font-size:12px;font-weight:800;padding:2px 9px}
+  details.card summary .open{margin-left:auto;color:#9ca3af;font-size:13px}
+  details.card[open] summary{border-bottom:1px solid #e5e7eb;background:#f8fafc}
+  details.card .body{padding:6px 16px 14px}
+  .step{display:inline-block;background:#1f2937;color:#fff;border-radius:999px;font-size:12px;font-weight:800;padding:2px 10px;margin-bottom:6px}
+  @media (max-width:640px){
+    /* 경로: 들여쓰기 목록 — 줄마다 한 단씩 들여 쓰고 왼쪽 레일·꺾은선으로 "위 줄의 자식"을 보인다 */
+    .path .row{justify-content:flex-start;gap:6px;position:relative;margin:0 0 2px;padding:3px 0 3px 14px}
+    .path .row .box{font-size:13px;padding:5px 8px}
+    .path .row .box.l1,.path .row .box.l2{font-size:13.5px}
+    .path .row.r1{padding-left:0}
+    .path .row .box.own,.path .row .box.cur{order:-1}   /* 자기 상자를 줄 맨 앞에 — 꺾은선이 그 상자에 닿는다 */
+    .path .row.r3{margin-left:14px}.path .row.r4{margin-left:28px}.path .row.r5{margin-left:42px}
+    .path .row:not(.r1)::before{content:"";position:absolute;left:0;top:-8px;width:2px;height:28px;background:#cbd5e1}
+    .path .row:not(.r1)::after{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:#cbd5e1}
+    .tree .l6cols{flex-direction:column;gap:14px;padding-top:0}
+    .tree .l6cols::before{display:none}
+    .tree .l6col{padding-top:0;padding-left:18px}
+    .tree .l6col::before{left:6px;top:-14px;height:calc(100% + 14px);width:2px}
+    .tree .l6col::after{top:21px;left:6px;right:auto;width:12px;height:2px}
+    .tree .l6col:first-child::after,.tree .l6col:last-child::after{left:6px;right:auto}
+    .tree .l6col:last-child::before{height:35px}
+    .tree .l7s{margin-left:14px}
+  }
+</style>
+</head>
+<body><div class="wrap">
+<a class="back" href="step2.html">← 2차 실습 안내로</a>
+<span class="step">2차 실습 · 고객서비스</span>
+<h1>컴플레인 응대 — 그룹 인터뷰</h1>
+<div class="path pyr" style="--c:#0e7490"><div class="row r1"><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">시장·고객 이해</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">상품 개발</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">공급·생산</span></div><div class="box l1 own"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">판매·서비스</span></div></div><div class="row r2"><div class="box l2 own"><span class="lv" style="background:#0e7490">L2</span><span class="nm">고객서비스</span></div><div class="box l2 dim"><span class="lv" style="background:#0e7490">L2</span><span class="nm">매장관리</span></div></div><div class="row r3"><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">주문 접수</span></div><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">서빙·전달</span></div><div class="box l3 own"><span class="lv" style="background:#15803d">L3</span><span class="nm">고객 응대</span></div><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">매장 환경 관리</span></div></div><div class="row r4"><div class="box l4 own"><span class="lv" style="background:#a16207">L4</span><span class="nm">컴플레인 응대</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">환불·교환 처리</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">리뷰 답글 작성</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">고객 문의 전화 응대</span></div></div><div class="row r5"><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">불만 내용 청취</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">현장 보상 결정</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">컴플레인 기록·이관</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">후속 조치 확인</span></div></div></div>
+<div class="guide"><div class="t">짝 실습</div>
+<ul><li><b>두 명씩 짝</b>을 지어 인터뷰 2·3·4 가운데 하나를 맡고, 앞에서 했던 것처럼 <b>L6 → L7</b> 로 정리해 주세요.</li>
+<li>L6 는 완결 산출물이 남는 단위 업무, L7 은 도구를 바꿔도 살아남는 행동 문장입니다.</li></ul></div>
+<div class="meta">임세라 매니저 (강남점 홀 주문·서빙 담당, 5년차) · 곽준영 (강남점 배달·포장 담당, 2년차) · 문혜정 대리 (본사 CS팀 고객 응대 담당, 6년차) · 인터뷰어: AX 컨설턴트</div>
+<div class="cards"><details class="card"><summary><span class="no">인터뷰 1</span><span class="nm">1. 불만 내용 청취</span><span class="done">1차에서 함께 함</span><span class="open">펼치기</span><span class="sub">L6: 불만 내용 확인·분류 · 사실 관계 확인</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>오늘은 컴플레인 한 건이 들어와서 끝날 때까지를 세 분과 같이 따라가 보려고 합니다. 강남점에는 불만이 어디로 들어오나요?</p></div><div class="qa a"><span class="who">임세라</span><p>세 군데요. 홀에서 직접 말씀하시는 거, 배달앱 메시지로 오는 거, 본사 대표번호로 걸려 와서 내려오는 거. 세 군데 다 합치면 한 달에 180건쯤 돼요. 하루로 치면 여섯 건입니다.</p></div><div class="qa a"><span class="who">문혜정</span><p>스물여덟 개 매장 중에 강남점이 제일 많아요. 손님이 제일 많은 매장이니까 그럴 만하죠. 저희 주간 집계에서 늘 맨 위에 있습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>홀에서 손님이 불만을 말씀하시면 어떻게 하세요?</p></div><div class="qa a"><span class="who">임세라</span><p>일단 말씀을 끊지 않고 끝까지 들어요. 중간에 &quot;그게 아니라&quot; 하는 순간 일이 두 배가 됩니다. 다 들으면 어느 주문인지부터 찾아요. 영수증을 갖고 계시면 금방인데, 없으시면 몇 시쯤 뭘 드셨는지 여쭤보고 주문 내역을 한 건씩 넘겨 가며 찾아요. 점심 피크에는 한 시간에 주문이 쉰 건 넘게 찍히거든요. 그 안에서 치즈버거 세트 하나 찾는 거예요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>찾고 나면 바로 응대에 들어가시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>메모부터 합니다. 카운터 밑에 접수 메모 묶음이 있어요. 음식, 대기, 직원, 배달 네 가지 중에 하나로 나눠서 적어요. 손님 앞에서 쓰면 기분 나빠하셔서, 응대 끝나고 바로 써요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>네 가지 중 어디에 넣을지 애매한 건 없나요?</p></div><div class="qa a"><span class="who">임세라</span><p>많죠. 버거가 식어서 왔다, 이건 음식이에요, 배달이에요? 저는 배달로 넣고 점장님은 음식으로 넣으세요. 그날 누가 메모했느냐에 따라 갈립니다.</p></div><div class="qa a"><span class="who">곽준영</span><p>저는 헷갈리면 그냥 배달에 넣어요. 제 쪽에서 생긴 일 같아서요. 그게 맞는 건지는, 잘 모르겠어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>배달 손님 불만은 어떻게 들어오나요?</p></div><div class="qa a"><span class="who">곽준영</span><p>앱으로 온 불만 메시지는 제가 읽어요. 태블릿 세 대 돌면서 메시지함을 하나씩 열어 봐요. 메시지는 사실 틈날 때만 봐요. 주문은 소리가 나는데 메시지는 소리가 안 나거든요. 점심 피크에 온 걸 세 시 넘어서 보는 날도 있어요. 그땐 손님이 벌써 별점 하나 남기고 가신 뒤고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>읽고 나서는 어떻게 하세요?</p></div><div class="qa a"><span class="who">곽준영</span><p>매니저님 메모 묶음에 같이 적어요. 제가 처음 왔을 땐 앱이 두 개였는데, 그때도 저는 받은 말을 종이에 옮겼어요. 앱이 하나 늘었을 땐 들여다볼 데가 한 군데 더 생겼죠. 메시지를 처음 놓쳐 본 것도 그 무렵이에요.</p></div><div class="qa a"><span class="who">문혜정</span><p>그 메모가 저희 쪽 접수랑 겹칠 때가 많아요. 같은 분이 매장에서 한 번, 앱에서 한 번, 저희 대표번호로 또 한 번 하세요. 따로 접수하면 저희 집계에서는 세 건이 됩니다. 실제로는 한 분인데요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>본사로 걸려 온 전화는 매장에 어떻게 전해지나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>통화 요지를 정리해서 매장 공용 메일로 보냅니다. 오후 다섯 시에 하루 치를 한 번에 보내요. 위생 건만 예외로 바로 전화드리고요.</p></div><div class="qa a"><span class="who">임세라</span><p>그래서 같은 건이면 한 장으로 묶어요. 성함이나 전화번호 끝자리를 보고요. 메일은 저녁에 오는데 저는 다음 날 아침에야 열어 보니까, 그때 가서 어제 메모를 뒤져 묶는 날도 있습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>메모를 하고 나면 무엇을 확인하시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>사실 확인이요. 저는 이게 제일 중요하다고 봐요. 전표를 꺼내서 손님 말씀이랑 하나씩 맞춰 봐요. 피클 빼 달라고 하셨는데 전표에 그게 없으면 카운터에서 잘못 받은 거고, 전표에 있으면 주방이 놓친 거죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>주방 쪽은 어떻게 확인하세요?</p></div><div class="qa a"><span class="who">임세라</span><p>그 시간에 그릴 본 친구한테 물어봐요. &quot;열두 시 반에 패티 몇 장 올렸어?&quot; 이런 식으로요. 피크 때 일은 기억 못 하는 친구가 많아서, 주방 모니터에 남은 시간을 같이 봅니다.</p></div><div class="qa a"><span class="who">곽준영</span><p>배달은 제가 봐요. 몇 시에 나갔는지는 제 노트에 다 있어요. 식어서 왔다고 하시면 나간 시각부터 보는데, 저희가 늦게 넘긴 건지 기사님이 돌아서 가신 건지가 거기서 갈려요. 아, 노트를 깜빡한 날은 앱에 찍힌 픽업 시간으로 봐요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>확인해 보면 손님 말씀과 기록이 다른 경우도 있나요?</p></div><div class="qa a"><span class="who">임세라</span><p>꽤 자주요. 하루 여섯 건이면 한 건은 손님이 기억하시는 거랑 전표가 다릅니다. 그렇다고 전표를 내밀진 않아요. 따지는 것처럼 보이거든요. 저만 알고 있다가 보상 정할 때 참고하죠.</p></div><div class="qa a"><span class="who">곽준영</span><p>배달은 사진을 보내 주시는 분이 많아서 그나마 나아요. 봉투 사진에 라벨이 찍혀 있으면 몇 번 주문인지 바로 나오거든요. 사진이 없으면, 음, 저도 매니저님처럼 하나씩 찾아요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>확인한 내용은 어디에 남기세요?</p></div><div class="qa a"><span class="who">임세라</span><p>처음 메모 뒷면에요. 맞는 거랑 아직 모르는 거를 나눠서 적어 둬요. 모르는 걸 아는 것처럼 써 놓으면 나중에 본사에서 꼭 다시 물어보시거든요.</p></div><div class="qa a"><span class="who">문혜정</span><p>매니저님이 올리실 때 확인된 거, 모르는 거를 나눠 적어 주시면 저는 그것부터 봅니다. 그게 비어 있으면 매장에 전화를 한 번 더 해야 하니까요.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 2</span><span class="nm">2. 현장 보상 결정</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>사실 확인이 끝나면 보상은 누가 정하나요?</p></div><div class="qa a"><span class="who">임세라</span><p>제가 정합니다. 우리 잘못인지 아닌지부터 가려요. 주방이 놓쳤으면 우리 잘못이고, 손님이 메뉴를 잘못 고르셨으면 보상까지는 안 갑니다. 그래도 기분은 상하셨으니까 사과는 드려요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>매장 잘못이면 어떤 보상을 하시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>다시 만들어 드리거나 쿠폰을 드리거나 환불해 드리거나, 셋 중에 골라요. 음식이 잘못 나갔으면 다시 만들고, 오래 기다리셨으면 음료 쿠폰이고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>매니저님이 정할 수 있는 범위가 있나요?</p></div><div class="qa a"><span class="who">임세라</span><p>있어요. 만 원 넘어가면 제 선에서 못 하고 본사로 올려요.</p></div><div class="qa a"><span class="who">문혜정</span><p>규정상 매장 현장 보상은 만 원까지입니다. 그 위는 저희 팀 승인이고요. 환불은 금액이 작아도 저희를 거치게 돼 있어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>만 원이면 어느 정도 보상인가요?</p></div><div class="qa a"><span class="who">임세라</span><p>세트 하나 다시 만들면 팔천 원 안쪽이에요. 단체 주문에서 서너 개가 잘못 나가면 금방 넘고요. 그럼 본사에 전화를 드려야 하는데, 대리님이 통화 중이시면 그것도 기다립니다.</p></div><div class="qa a"><span class="who">문혜정</span><p>매장마다 기준이 조금씩 달라서 저희도 고민이에요. 같은 음료 누락인데 어떤 매장은 쿠폰이 나가고, 어떤 매장은 세트값을 돌려 드려요. 고객 게시판에 두 매장을 비교한 글이 올라온 적도 있습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>매니저님이 안 계실 때는 어떻게 되나요?</p></div><div class="qa a"><span class="who">곽준영</span><p>보상은 매니저님만 정할 수 있어서, 안 계시면 손님이 그냥 기다리세요. 매니저님이 사무실에서 발주 보시거나 창고에 계시면 제가 뛰어가요. 그동안 손님은 카운터 앞에 서 계시고요. 저는 뭐라고 해야 할지 몰라서 &quot;잠시만요&quot;만 세 번쯤 해요.</p></div><div class="qa a"><span class="who">임세라</span><p>지난달에 점장님이 컴플레인 메모를 쭉 넘겨 보시더니, 결정까지 평균 30분 걸렸다고 하시더라고요. 점장님이 쉬시는 날엔 저 말고 정할 사람이 없어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>기다리시는 동안 손님 반응은 어떤가요?</p></div><div class="qa a"><span class="who">곽준영</span><p>십 분 넘어가면 표정이 바뀌세요. 이십 분쯤 되면 휴대폰을 꺼내시고요. 그게 본사 대표번호로 거시는 거라는 걸 저는 한참 뒤에 알았어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>준영 님이 직접 정하시면 안 되나요?</p></div><div class="qa a"><span class="who">곽준영</span><p>제가요? 쿠폰 한 장 정도는, 음, 할 수 있을 것도 같은데요. 잘못 드렸다가 혼날까 봐요. 입사하고 석 달쯤 됐을 때 음료 쿠폰을 드렸는데 손님이 두 장 달라고 하셔서 진땀 뺀 적이 있어요. 그다음부턴 무조건 매니저님 불러요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>보상을 정하면 손님께는 어떻게 말씀드리나요?</p></div><div class="qa a"><span class="who">임세라</span><p>이렇게 해 드려도 될지 여쭤봐요. 대부분은 괜찮다고 하시고, 열에 한 분은 더 달라고 하세요. 그럼 한도 안에서 한 번 더 맞춥니다. 끝나면 뭘 드렸는지, 왜 드렸는지 한 줄 적어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>적어 둔 이유는 어디에 쓰이나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>보상이 다른 매장보다 크게 나간 달은 제가 매장에 여쭤봐요. 그 한 줄이 있으면 통화가 일 분이면 끝나고, 없으면 매니저님도 기억을 못 하세요.</p></div><div class="qa a"><span class="who">임세라</span><p>맞아요. 석 달 전 일을 물어보시면 저도 메모 없인 몰라요. 일 년에 두세 번은 그런 전화를 받습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>정한 보상은 어떻게 전달되나요?</p></div><div class="qa a"><span class="who">임세라</span><p>다시 만든 건 제가 직접 들고 가요. 자리까지요. 그때 한 번 더 고개 숙이는 게 제일 잘 통합니다.</p></div><div class="qa a"><span class="who">곽준영</span><p>쿠폰은 제가 드려요. 쿠폰 묶음을 제 자리 서랍에 넣어 두거든요. 종이 쿠폰에 도장 찍어서 드리는데, 쿠폰을 드리면 번호를 꼭 남겨요. 안 그러면 같은 분이 두 번 쓰셔도 몰라요. 쿠폰 한 장마다 대장에 손으로 한 줄씩 써요. 날짜, 번호, 무슨 건인지요. 예전엔 컴퓨터 파일로 적었는데 날아간 적이 있어서 대장으로 바꿨대요. 손으로 쓰니까 제 글씨를 제가 못 알아볼 때가 있어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>환불은 어떻게 처리되나요?</p></div><div class="qa a"><span class="who">임세라</span><p>환불은 본사에 승인을 올려요. 손님께 오늘 바로는 어렵다고 말씀드려야 해서 그게 제일 난처합니다.</p></div><div class="qa a"><span class="who">문혜정</span><p>저희 승인까지 하루, 길면 이틀 걸려요. 매장 결제인지 앱 결제인지에 따라 환불 방식이 달라서 그것부터 확인하고 승인하거든요. 승인 대기가 하루 열 건 넘게 쌓이는 날도 있습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>승인을 기다리는 동안 손님은 어떻게 하시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>다시 연락하세요. 매장으로도 하시고 본사로도 하시고요. 그게 또 새 건으로 잡혀서 아까 말씀드린 묶는 일이 하나 더 늘어요.</p></div><div class="qa a"><span class="who">곽준영</span><p>배달 손님한테는 언제 들어가는지까지 말씀드려요. 승인 나면 삼사 일 안에 들어간다고 답장을 보내요. 그걸 안 쓰면 다음 날 또 메시지가 와요.</p></div><div class="qa a"><span class="who">임세라</span><p>보상이 다 나가면 메모에 처리 끝났다고 표시해 둬요. 환불 건은 본사 승인을 보고 표시하니까 며칠씩 열려 있고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>나간 보상은 나중에 다시 보시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>월말에 점장님이 쿠폰 나간 거하고 환불 나간 걸 합쳐서 보세요. 쿠폰만 한 달에 예순 장쯤 나갑니다.</p></div><div class="qa a"><span class="who">곽준영</span><p>그때 대장 글씨 때문에 제가 불려 가요. 이게 3이냐 8이냐 하시면서요. 저도 모르겠다고 하면 둘이 한참 들여다봐요.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 3</span><span class="nm">3. 컴플레인 기록·이관</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>보상까지 끝나면 기록은 어떻게 남기시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>매장 대장에 정식으로 씁니다. 접수 메모랑 보상 기록을 합쳐서 한 건으로 써요. 몇 시, 몇 번 주문인지는 꼭 넣어요. 그게 빠지면 석 달 뒤에 아무도 못 찾습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>대장 말고 다른 곳에도 쓰시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>본사에도 똑같이 올려요. 마감하고 사무실 컴퓨터로 본사 시스템에 접속해서 또 입력하는 거죠. 배달 건이면 준영 씨가 앱 답글로 한 번 더 쓰고요. 대장에 한 번, 본사에 한 번, 답글에 한 번. 똑같은 얘기를 세 군데에 쓰는 거예요.</p></div><div class="qa a"><span class="who">곽준영</span><p>답글은 제가 마감 전에 써요. 매니저님 메모를 거의 그대로 옮기는데, 손님이 보시는 거라 말투만 부드럽게 바꿔요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>본사에 올리는 내용과 대장 내용이 다른가요?</p></div><div class="qa a"><span class="who">임세라</span><p>내용은 같은데 순서가 달라요. 대장은 제가 편한 대로 쓰고, 본사 쪽은 유형, 시각, 주문 번호, 보상 금액 순으로 칸이 정해져 있어요. 옮기면서 순서를 다시 맞춥니다.</p></div><div class="qa a"><span class="who">문혜정</span><p>저희가 받아 보면 칸은 대체로 차 있어요. 제일 자주 비는 게 보상 금액이에요. 늦은 밤에 급하게 쓰시니까요. 그럼 다음 날 제가 전화로 여쭤봐요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>세 군데에 쓰는 데 시간은 얼마나 드나요?</p></div><div class="qa a"><span class="who">임세라</span><p>세 군데 다 쓰면 한 건에 15분이에요. 하루 여섯 건이면 한 시간 반이죠. 장사 중엔 펜 들 틈이 없으니까 기록은 다 뒤로 밀립니다.</p></div><div class="qa a"><span class="who">곽준영</span><p>답글은 제 몫이라 그 15분에 들어가는지는 모르겠어요. 저도 마감 전 삼십 분은 리뷰랑 답글에 붙어 있거든요. 앱 세 개를 하나씩 들어가야 해서요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그럼 언제 쓰시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>마감하고 나서요. 그날 메모를 한 장도 안 빼고 옮겨요. 문제는 마감이 밤 열한 시라 그날 건을 그날 못 쓰는 날이 많아요. 다음 날 아침에 메모만 보고 기억을 더듬어서 쓰죠.</p></div><div class="qa a"><span class="who">문혜정</span><p>그 하루 차이가 저희한테도 보여요. 매장 기록이 늦게 올라오니까, 그동안 대표번호로 다시 전화하신 손님한테 매장 확인 중이라는 말밖에 못 드려요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>매장에서 본사로 넘기는 건은 어떤 건가요?</p></div><div class="qa a"><span class="who">임세라</span><p>제 선에서 안 끝나는 건 따로 빼요. 만 원 넘는 보상, 환불, 이물질 같은 위생 얘기, 그리고 본사랑 직접 얘기하겠다고 하시는 분이요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>넘길 때 무엇을 같이 보내시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>무슨 일이 있었는지, 손님이 뭘 원하시는지까지 세 줄로 써서 올려요. 길게 쓰면 저부터 정리가 안 돼요. 넘긴 건은 대장에 빨간 펜으로 이관이라고 표시해 둡니다. 번호가 오면 그 옆에 적고요.</p></div><div class="qa a"><span class="who">문혜정</span><p>저희는 넘어온 건은 유형부터 다시 봐요. 매장은 네 가지로 나누시고 저희는 품질, 위생, 응대 태도, 배달 지연, 주문 오류 다섯 가지로 나누거든요. 주문 오류가 매장에서는 음식으로 오고, 배달 지연이 대기로 오고요. 다섯 건 중 한 건은 유형이 잘못 붙어서 와요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>유형이 잘못 붙으면 어떤 일이 생기나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>담당 부서가 바뀝니다. 위생 건이 음식으로 와서 품질관리팀에만 가 있으면, 점장님하고 운영팀 연락이 이틀 늦어요. 위생은 그 두 곳에 같이 알려야 하는 건인데요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>하루에 몇 건 정도가 본사로 넘어오나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>스물여덟 개 매장에서 하루 열다섯 건 안팎이요. 월요일은 주말 몫까지 와서 서른 건 가까이 됩니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>유형을 고친 다음에는요?</p></div><div class="qa a"><span class="who">문혜정</span><p>접수 번호 붙이고 담당자를 정해요. 팀이 세 명인데 한 명은 하루 종일 대표번호에 붙어 있어야 해요. 돌아가면서 받거든요. 그래서 이관 건은 그날 전화 안 받는 둘이 맡아요. 스물여덟 개 매장 걸 저희 둘이 나눠 받아요. 한 사람이 휴가면 남은 한 사람이 다 받고, 그 주는 번호 붙이는 데만 하루가 걸립니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>두 분이 나눠 받는 기준이 있나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>매장 번호 홀수, 짝수로 나눠요. 위생 건만 예외로 제가 다 받습니다. 규정상 위생은 한 사람이 처음부터 끝까지 봐야 하거든요.</p></div><div class="qa a"><span class="who">곽준영</span><p>저는 그 번호를 계속 기다려요. 손님이 어떻게 됐냐고 메시지를 보내시면 번호라도 알려 드려야 하니까요. 번호가 없으면 확인 중이라는 말만 두 번, 세 번 하게 돼요.</p></div><div class="qa a"><span class="who">문혜정</span><p>번호 붙이면 매니저님께 바로 알려 드려요. 매장 이름하고 접수 번호를 문자로요. 손님이 나중에 그 번호로 물어보시면 저희가 바로 찾을 수 있습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>번호가 늦게 오면 매장에서는 어떻게 하세요?</p></div><div class="qa a"><span class="who">임세라</span><p>이틀 넘게 안 오면 제가 본사에 전화를 드려요. 대리님 목소리만 들어도 오늘 바쁘시구나 알아요. 월요일엔 아예 안 걸고 화요일에 겁니다.</p></div><div class="qa a"><span class="who">문혜정</span><p>그 하루 사이에 그 손님 전화를 제가 두 번 받은 적도 있어요.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 4</span><span class="nm">4. 후속 조치 확인</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>본사로 넘어간 건은 손님께 결과가 어떻게 전달되나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>먼저 담당 부서 회신을 받아요. 운영지원팀이나 품질관리팀, 아니면 마케팅팀 채널 담당이요. 회신 기한은 이틀로 걸어 두고, 기한이 지나면 제가 다시 물어봅니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>회신이 오면 바로 연락하시나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>한 번 손봐요. 부서 회신은 정산 차감 처리, 이런 말로 와요. 그대로 읽어 드리면 못 알아들으세요. 저희 말 말고 손님 말로 바꿔서 정리해요. 그다음 전화로 오신 분은 전화로, 앱으로 오신 분은 앱으로 연락드려요.</p></div><div class="qa a"><span class="who">곽준영</span><p>앱으로 오신 분은 제 쪽으로 와요. 대리님이 정리해 주신 걸 받아서 제가 메시지로 보내 드려요. 대리님 문장이 저보다 훨씬 깔끔해서 거의 안 고쳐요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>접수부터 손님이 결과를 듣기까지 얼마나 걸리나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>접수하고 손님한테 결과 말씀드리기까지 평균 이틀 반 걸려요. 매장 기록이 하루 늦게 올라오는 날이 있고, 부서 회신 기한이 이틀이라 그 안쪽으로는 잘 안 들어옵니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>기한이 지나도 회신이 없으면요?</p></div><div class="qa a"><span class="who">문혜정</span><p>메신저로 다시 여쭤봐요. 그 건 어떻게 됐을까요, 하고요. 그런 독촉만 하루에 대여섯 번 합니다. 기한 지난 건은 제 수첩에 적어 두고 아침마다 넘겨 봐요.</p></div><div class="qa a"><span class="who">곽준영</span><p>그사이에 손님이 리뷰를 한 번 더 쓰시는 경우도 있어요. 별점을 더 내리시면서요. 그럼 저는 답글을 한 번 더 달고, 대리님께 그 리뷰도 같이 넘겨 드려요.</p></div><div class="qa a"><span class="who">임세라</span><p>매장으로 다시 오시는 분도 계세요. 본사에서 연락 준다더니 아직이라고 하시면 저도 드릴 말이 없어요. 번호를 알려 드리고 한 번 더 사과하는 게 다예요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>연락드린 뒤에는 무엇을 남기시나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>언제 뭐라고 말씀드렸는지 남겨요. 상담 대장에 날짜하고 안내 요지를 씁니다. 같은 분이 또 전화하시면 거기서부터 이어서 말씀드리려고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>안내를 받고도 손님이 납득하지 못하시면요?</p></div><div class="qa a"><span class="who">문혜정</span><p>다시 엽니다. 한 달에 서른 건 가까이는 다시 열려요. 접수 번호는 그대로 두고 회신 기한을 새로 걸어요.</p></div><div class="qa a"><span class="who">임세라</span><p>다시 열린 건은 매장에서 한 번 더 전화를 드리기도 해요. 단골이시면 특히요. 점심마다 오시던 분이 안 오시면 저희가 먼저 알거든요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>같은 일이 다시 안 생기게 하는 일은 누가 챙기나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>매장에 어떻게 막을 건지 적어 달라고 해요. 재발 방지 양식이 따로 있어요. 원인, 조치, 담당자, 완료 예정일 네 칸입니다.</p></div><div class="qa a"><span class="who">임세라</span><p>조치 양식에 뭘 바꿀지 적어서 보내요. 지난달엔 세트 음료가 빠지는 게 세 번 나와서, 트레이 올릴 때 음료부터 보기로 적었어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그렇게 정한 걸 직원들에게는 어떻게 알리시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>주간 조회 때 말합니다. 문제는 아르바이트생이 자주 바뀌어요. 한 달 지나면 그 얘기를 들은 사람이 절반도 안 남습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그 조치가 실제로 지켜지는지는 어떻게 아시나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>솔직히 양식만 받고 끝나는 게 대부분이에요. 원래는 정말 바꿨는지 매장에 확인해야 하거든요. 양식에도 확인 끝난 건 확인일을 적게 돼 있어요. 그 칸이 거의 비어 있습니다. 저희 둘이 이관 건 받는 것만으로도 하루가 다 가서요.</p></div><div class="qa a"><span class="who">곽준영</span><p>매장도 비슷해요. 양식 보내고 나면 다들 잊어버려요. 저는 그 음료 얘기를 지난주에야 처음 들었어요. 포장 쪽에도 해당되는 건데요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>본사에서 매장 조치를 직접 볼 방법은 없나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>운영지원팀 슈퍼바이저가 한 달에 한 번 매장을 돌아요. 그분께 확인할 목록을 드리면 되는데, 그 목록을 뽑을 사람이 없어서 아직 못 드리고 있습니다. 양식은 이백 장 넘게 쌓여 있어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>같은 일이 다시 생겼는지는 어떻게 보시나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>주간 집계 때 같은 매장에서 같은 유형이 또 나왔는지 봐요. 세 번 넘으면 월요일 운영 회의에 올리고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>회의에 올라간 건은 그 뒤에 어떻게 되나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>운영팀에서 해당 매장 점장님께 직접 연락하세요. 지난 분기엔 그렇게 올라간 매장이 여섯 곳이었어요. 그 연락이 가야 매장에서 예전 양식을 다시 꺼내 보시더라고요.</p></div><div class="qa a"><span class="who">임세라</span><p>본사에서 그런 연락이 오면 그제야 대장을 다시 뒤져 봅니다. 아, 이거 지난달에 적어 보낸 그거구나 하고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>마지막으로 여쭙겠습니다. 컴플레인 한 건을 따라가면서 제일 오래 붙잡혀 있는 데가 어디인가요?</p></div><div class="qa a"><span class="who">곽준영</span><p>저는 메시지를 늦게 보는 거요. 제가 열어 봤을 땐 손님이 이미 반은 화가 나 계세요. 거기서부터는 뭘 해 드려도 별점이 잘 안 돌아와요.</p></div><div class="qa a"><span class="who">임세라</span><p>제가 자리에 없을 때요. 그 30분 동안 손님은 카운터 앞에 서 계시니까요.</p></div><div class="qa a"><span class="who">문혜정</span><p>같은 건을 세 번 받아서 하나로 맞추는 거요. 매주 집계 때마다 그걸 먼저 지우고 시작해요.</p></div></div></details></div>
+<div class="foot"><a class="back" href="step2.html">← 2차 실습 안내로</a></div>
+</div></body>
+</html>

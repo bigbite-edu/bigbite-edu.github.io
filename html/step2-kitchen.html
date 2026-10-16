@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>조리생산 2차 실습 — 일일 준비량 산정</title>
+<style>@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f8fafc;color:#1f2937;line-height:1.65;
+    font-family:"Presentation","Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;font-size:16px}
+  h1,h2,h3,.grp,.card .nm,.guide .t,.rules .t,.who,.tab,.box .nm{
+    font-family:"Paperozi","Presentation","Malgun Gothic",system-ui,sans-serif}
+  .wrap{max-width:680px;margin:0 auto;padding:16px 18px 60px}
+  .wide .wrap{max-width:1560px}
+  a{color:#1d4ed8;text-decoration:none}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;
+    color:#4b5563;background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:6px 14px;margin:4px 0 14px}
+  .chip{display:inline-block;border-radius:6px;color:#fff;font-size:12px;font-weight:700;padding:2px 8px}
+  h1{font-size:23px;margin:6px 0 2px;line-height:1.35}
+  .meta{color:#6b7280;font-size:14px;margin-bottom:14px}
+  .guide{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px 16px;margin:14px 0 20px}
+  .guide .t{font-weight:800;font-size:14px;margin-bottom:6px}
+  .guide ul,.guide ol{margin:0;padding-left:18px;font-size:14px}
+  .guide li{margin:3px 0;word-break:keep-all}
+  .guide b{color:#b45309}
+  h2{font-size:18px;margin:26px 0 8px;padding-left:10px;border-left:4px solid #cbd5e1}
+  .qa{margin:12px 0}
+  .who{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+  .q .who{color:#6b7280}
+  .a .who{color:#1d4ed8}
+  .q p,.a p{margin:0;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 14px}
+  .a p{background:#eff6ff;border-color:#bfdbfe}
+  .foot{margin-top:34px;padding-top:14px;border-top:1px solid #e5e7eb;text-align:center}
+  .lead{color:#4b5563;font-size:15px;margin:4px 0 18px}
+  .rules{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 18px;margin-bottom:22px}
+  .rules .t{font-weight:800;margin-bottom:8px}
+  .rules ol,.rules ul{margin:0;padding-left:20px;font-size:14.5px}
+  .rules li{margin:6px 0;word-break:keep-all}
+  .grp{font-size:16px;font-weight:800;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+  .card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;margin:10px 0;color:inherit}
+  .card .nm{font-weight:800;font-size:16.5px}
+  .card .who2{color:#6b7280;font-size:14px;margin-top:2px}
+  .card .l5{color:#92400e;font-size:13px;margin-top:6px;word-break:keep-all}
+  .card .go{float:right;color:#9ca3af;font-size:18px}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+  .links a{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+  .tab{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;color:#fff;opacity:.55}
+  .tab.on{opacity:1;box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor}
+  .panel{display:none}
+  .panel.on{display:block}
+
+  .pyr{margin:10px 0 30px}
+  .pyr .row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+  .pyr .grps{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:flex-start}
+  .pyr .g3{flex:1 1 300px;min-width:0;max-width:480px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .pyr .kids{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .box{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1.5px solid #cbd5e1;border-radius:10px;padding:7px 10px;font-size:14px;line-height:1.4;word-break:keep-all;min-width:0}
+  .box .lv{flex:none;border-radius:6px;color:#fff;font-size:11px;font-weight:800;padding:1px 6px;margin-top:2px}
+  .box.l1,.box.l2{font-weight:800;font-size:15px;min-width:min(220px,100%);justify-content:center}
+  .box.l3{font-weight:800;background:#f0fdf4}
+  .box.l4{background:#fffbeb}
+  .box.l4.hot{border:3px solid #a16207;background:#fef3c7;font-weight:800}
+  .box.l5{background:#faf5ff;font-size:13px;margin-left:22px}
+  .box.l5.star{border:2.5px solid #9333ea;font-weight:800}
+  .pyr .l5s{display:flex;flex-direction:column;gap:4px;margin:4px 0 2px}
+  .ans .l6s{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-top:10px}
+  .ans .l6g{flex:1 1 320px;min-width:0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .ans .box.l6{background:#fdf2f8;font-weight:800}
+  .ans .out{font-size:12.5px;color:#9d174d;margin:4px 0 6px 4px}
+  .ans .l7{display:flex;gap:8px;align-items:flex-start;border:1.5px solid #fecaca;background:#fff;border-radius:10px;padding:6px 10px;margin:6px 0;font-size:13.5px}
+  .ans .ev{display:block;color:#6b7280;font-size:12px;margin-top:2px}
+  .ans .wrong{background:#f1f5f9;border:1px dashed #94a3b8;border-radius:10px;padding:8px 12px;font-size:13px;margin-top:10px}
+  .ans .wrong b{color:#475569}
+
+  .tabs.v2{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0 18px}
+  .tabs.v2 .tab{opacity:1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;
+    padding:9px 8px;border-radius:10px;font-size:15px;line-height:1.2;word-break:keep-all;cursor:pointer;
+    background:#fff;color:var(--c);border:2px solid var(--c);box-shadow:0 3px 0 #cbd5e1;
+    transition:transform .08s,box-shadow .08s,background .12s}
+  .tabs.v2 .tab:hover{background:color-mix(in srgb,var(--c) 10%,#fff)}
+  .tabs.v2 .tab:active{transform:translateY(2px);box-shadow:0 1px 0 #cbd5e1}
+  .tabs.v2 .tab.on{background:var(--c);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.28)}
+  .pyr .top{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 16px;padding-bottom:14px;border-bottom:1px dashed #cbd5e1}
+  .pyr .vc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .pyr .vc .l2s{display:flex;flex-direction:row;gap:6px;padding:6px 6px 0;margin:0 6px;border-top:2px solid #e5e7eb}
+  .pyr .vc .box{min-width:0;justify-content:center;font-size:14px}
+  .pyr .vc .l2s .box{flex:1 1 0}
+  .pyr .vc .box.l1{font-size:15px}
+  .pyr .vc .box.own{border-width:2.5px;border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 18%,transparent)}
+  .pyr .vc a.box{color:inherit;cursor:pointer;box-shadow:0 2px 0 #cbd5e1}
+  .pyr .vc a.box:hover{border-color:#94a3b8;background:#fff}
+  .pyr .vc a.box:active{transform:translateY(1px);box-shadow:none}
+  .box.dim{color:#9ca3af;background:#f3f4f6;border-color:#e5e7eb;font-weight:600}
+  .box.dim .lv{background:#b0b7c3!important}
+  .pyr .vc.dim .l2s{border-top-color:#eef0f3}
+  .pyr .hint{font-size:12.5px;color:#6b7280;text-align:center;margin:-8px 0 14px}
+  @media (max-width:640px){
+    .tabs.v2{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .tabs.v2 .tab{font-size:14px;padding:8px 4px;min-height:40px}
+    .pyr .top{flex-direction:column;align-items:stretch}
+    .pyr .vc{flex:1 1 auto}
+    .pyr .vc .box{font-size:13px;padding:6px 8px}
+    .pyr .vc a.box.l2{min-height:42px;align-items:center}
+    .pyr .vc .box.l1{font-size:14px}
+  }
+
+  .path{margin:4px 0 12px}
+  .path .row{margin:0 0 6px}
+  .path .row .box{flex:0 1 auto;margin:0}
+  .path .row .box.own{border-width:2.5px;font-weight:800}
+  .path .row .box.l1,.path .row .box.l2{min-width:0;font-size:14.5px}
+  .path .row .box.l1.own,.path .row .box.l2.own{border-color:var(--c)}
+  .path .row .box.l3.own{border-color:#16a34a}
+  .path .row .box.l4.own{border-color:#a16207}
+  .box.l5.cur{border:2.5px solid #9333ea;background:#f3e8ff;font-weight:800}
+  .path .chain{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:10px}
+  .path .chain .arrow{color:#94a3b8;font-weight:800}
+  .path .chain .box{flex:0 1 auto}
+  .pyr .vc .box.own{box-shadow:none}
+  h1+.path{margin-top:0}
+  /* 트리 */
+  .tree{margin:14px auto 26px;max-width:960px}
+  .grp.sep{border-top:1px solid #e5e7eb;padding-top:16px;margin-top:26px}
+  .tree .root{display:flex;justify-content:center}
+  .tree .root .box{min-width:0;margin:0;font-weight:800}
+  .tree .l6cols{display:flex;gap:18px;align-items:flex-start;justify-content:center;position:relative;padding-top:18px}
+  .tree .l6col{flex:1 1 0;min-width:0;position:relative;padding-top:18px}
+  .tree .l6col::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .l6col::after{content:"";position:absolute;top:0;height:2px;background:#94a3b8;left:0;right:0}
+  .tree .l6col:first-child::after{left:50%}
+  .tree .l6col:last-child::after{right:50%}
+  .tree .l6col:only-child::after{display:none}
+  .tree .l6cols::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .box.l6{background:#fdf2f8;font-weight:800;justify-content:flex-start;min-height:42px}
+  .tree .l7s{position:relative;margin:8px 0 0 22px;padding-left:16px;display:flex;flex-direction:column;gap:6px}
+  .tree .l7s::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:#94a3b8}
+  .tree .l7{position:relative}
+  .tree .l7::before{content:"";position:absolute;left:-16px;top:19px;width:16px;height:2px;background:#94a3b8}
+  .tree .l7:last-child::after{content:"";position:absolute;left:-17px;top:21px;bottom:-8px;width:4px;background:#f8fafc}
+  .tree .l7 .box{min-height:38px;font-size:13.5px}
+  .tree .l7 .box.l7{background:#fff;border-color:#fecaca}
+  .tree .box.blank{background:#fff;border-style:dashed;color:#cbd5e1}
+  .tree .box.blank .nm{flex:1;min-height:18px}
+  .tree .out{font-size:12.5px;color:#9d174d;margin:4px 0 0 4px}
+  /* 근거 (?) */
+  .ev{display:none;font-size:12.5px;color:#475569;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:5px 9px;margin:4px 0 0 4px;word-break:keep-all}
+  .ev b{color:#1f2937}
+  .show-ev .ev{display:block}
+  .qbtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    border:2px solid #475569;background:#fff;color:#475569;font-weight:800;font-size:16px;cursor:pointer;margin-left:8px;vertical-align:middle}
+  .qbtn.on{background:#475569;color:#fff}
+  .qrow{display:flex;align-items:center;gap:8px;margin:14px 0 6px;font-weight:800;font-size:15px}
+  .qrow .hint2{font-weight:500;color:#6b7280;font-size:13px}
+  /* 병목·지연·낭비 마킹 */
+  .bdw{display:inline-block;flex:none;border-radius:6px;font-size:11px;font-weight:800;padding:1px 6px;margin-left:6px;color:#fff;letter-spacing:.02em}
+  .bdw-B{background:#dc2626}.bdw-D{background:#ca8a04}.bdw-W{background:#2563eb}
+  .box.has-B{border-color:#dc2626;background:#fee2e2}
+  .box.has-D{border-color:#ca8a04;background:#fef9c3}
+  .box.has-W{border-color:#2563eb;background:#dbeafe}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:#4b5563;margin:4px 0 14px}
+  .legend span{display:inline-flex;align-items:center;gap:4px}
+  /* 카드(2차) */
+  .cards{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+  details.card{padding:0;overflow:hidden}
+  details.card summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  details.card summary::-webkit-details-marker{display:none}
+  details.card summary .no{flex:none;border-radius:8px;background:#1f2937;color:#fff;font-weight:800;font-size:13px;padding:3px 9px}
+  details.card summary .nm{font-weight:800;font-size:16px}
+  details.card summary .sub{color:#6b7280;font-size:13.5px;width:100%;word-break:keep-all}
+  details.card summary .done{background:#dcfce7;color:#166534;border-radius:999px;font-size:12px;font-weight:800;padding:2px 9px}
+  details.card summary .open{margin-left:auto;color:#9ca3af;font-size:13px}
+  details.card[open] summary{border-bottom:1px solid #e5e7eb;background:#f8fafc}
+  details.card .body{padding:6px 16px 14px}
+  .step{display:inline-block;background:#1f2937;color:#fff;border-radius:999px;font-size:12px;font-weight:800;padding:2px 10px;margin-bottom:6px}
+  @media (max-width:640px){
+    /* 경로: 들여쓰기 목록 — 줄마다 한 단씩 들여 쓰고 왼쪽 레일·꺾은선으로 "위 줄의 자식"을 보인다 */
+    .path .row{justify-content:flex-start;gap:6px;position:relative;margin:0 0 2px;padding:3px 0 3px 14px}
+    .path .row .box{font-size:13px;padding:5px 8px}
+    .path .row .box.l1,.path .row .box.l2{font-size:13.5px}
+    .path .row.r1{padding-left:0}
+    .path .row .box.own,.path .row .box.cur{order:-1}   /* 자기 상자를 줄 맨 앞에 — 꺾은선이 그 상자에 닿는다 */
+    .path .row.r3{margin-left:14px}.path .row.r4{margin-left:28px}.path .row.r5{margin-left:42px}
+    .path .row:not(.r1)::before{content:"";position:absolute;left:0;top:-8px;width:2px;height:28px;background:#cbd5e1}
+    .path .row:not(.r1)::after{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:#cbd5e1}
+    .tree .l6cols{flex-direction:column;gap:14px;padding-top:0}
+    .tree .l6cols::before{display:none}
+    .tree .l6col{padding-top:0;padding-left:18px}
+    .tree .l6col::before{left:6px;top:-14px;height:calc(100% + 14px);width:2px}
+    .tree .l6col::after{top:21px;left:6px;right:auto;width:12px;height:2px}
+    .tree .l6col:first-child::after,.tree .l6col:last-child::after{left:6px;right:auto}
+    .tree .l6col:last-child::before{height:35px}
+    .tree .l7s{margin-left:14px}
+  }
+</style>
+</head>
+<body><div class="wrap">
+<a class="back" href="step2.html">← 2차 실습 안내로</a>
+<span class="step">2차 실습 · 조리생산</span>
+<h1>일일 준비량 산정 — 그룹 인터뷰</h1>
+<div class="path pyr" style="--c:#b91c1c"><div class="row r1"><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">시장·고객 이해</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">상품 개발</span></div><div class="box l1 own"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">공급·생산</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">판매·서비스</span></div></div><div class="row r2"><div class="box l2 dim"><span class="lv" style="background:#0e7490">L2</span><span class="nm">자재조달</span></div><div class="box l2 own"><span class="lv" style="background:#0e7490">L2</span><span class="nm">조리생산</span></div></div><div class="row r3"><div class="box l3 own"><span class="lv" style="background:#15803d">L3</span><span class="nm">전처리</span></div><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">조리</span></div><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">품질 관리</span></div></div><div class="row r4"><div class="box l4 own"><span class="lv" style="background:#a16207">L4</span><span class="nm">일일 준비량 산정</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">야채 세척·손질</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">패티·소스 사전 준비</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">준비품 보관·라벨링</span></div></div><div class="row r5"><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">전일 판매·기상 확인</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">품목별 준비 수량 결정</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">준비 계획 공유</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">준비 실적 대비 확인</span></div></div></div>
+<div class="guide"><div class="t">짝 실습</div>
+<ul><li><b>두 명씩 짝</b>을 지어 인터뷰 2·3·4 가운데 하나를 맡고, 앞에서 했던 것처럼 <b>L6 → L7</b> 로 정리해 주세요.</li>
+<li>L6 는 완결 산출물이 남는 단위 업무, L7 은 도구를 바꿔도 살아남는 행동 문장입니다.</li></ul></div>
+<div class="meta">최영호 주임 (강남점 주방 전처리 담당, 10년차) · 윤가희 (강남점 조리 담당, 3년차) · 서동민 과장 (본사 품질관리팀, 8년차) · 인터뷰어: AX 컨설턴트</div>
+<div class="cards"><details class="card"><summary><span class="no">인터뷰 1</span><span class="nm">1. 전일 판매·기상 확인</span><span class="done">1차에서 함께 함</span><span class="open">펼치기</span><span class="sub">L6: 전일 판매 실적 확인 · 당일 수요 변수 확인</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>세 분 일하시는 자리는 다 다르지만, 오늘은 강남점 아침 준비량 하나로 모셨습니다. 하루가 어떻게 시작되나요?</p></div><div class="qa a"><span class="who">최영호</span><p>전처리는 7시에 시작합니다. 오전조 두 명이 먼저 와서 야채 씻고 해동칸 정리하고요. 저는 8시에 들어옵니다. 들어오면 어젯밤 마감표부터 펴 놓습니다. 메뉴별로 몇 개 나갔는지 찍혀 있는 종이요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>강남점은 하루에 몇 건이나 나가나요?</p></div><div class="qa a"><span class="who">최영호</span><p>평일 600건 안팎입니다. 그중 절반이 점심 두 시간에 몰리고요. 배달이 절반 가까이 됩니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>마감표는 누가 준비해 두나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>마감조가요. 저도 한 주씩 돌아가면서 마감을 서는데, 밤 11시쯤 정리가 다 끝나면 POS 마감표를 사진 찍어서 단톡방에 올려요. 종이는 주임님 자리에 클립으로 집어 두고요. 근데 주임님은 사진은 잘 안 보시더라고요.</p></div><div class="qa a"><span class="who">최영호</span><p>사진은 글씨가 작아서요. 종이가 낫습니다. 십 년 전엔 영수증처럼 길게 말려 나오는 전표를 그대로 들고 왔어요. 종이 모양만 바뀌었지, 거기서 숫자 뽑아내는 건 그때나 지금이나 제 몫입니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>마감표 숫자를 그대로 쓰시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>아니요. 마감표는 메뉴 기준이고 저는 재료 기준으로 봐야 하거든요. 그래서 버거 몇 개 나갔는지를 패티 몇 장, 양상추 몇 킬로로 바꿔 적어요. 마감표 숫자를 공책에 하나하나 다시 옮겨 적는 거죠. 품목이 스무 가지쯤 되니까 이것만 해도 한참입니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>본사에서 정리된 판매 자료가 내려오지는 않나요?</p></div><div class="qa a"><span class="who">서동민</span><p>내려옵니다. 영업지원팀에서 매장별·품목별로 정리한 판매 집계를 보내는데, 저희 품질관리팀도 폐기율을 볼 때 그 자료를 씁니다. 다만 직영 열두 곳 마감을 다 모아서 돌리다 보니 아침 일찍은 안 나와요.</p></div><div class="qa a"><span class="who">최영호</span><p>본사 집계는 9시가 넘어야 와요. 그때까지 기다리면 오전조가 손 놓고 있어야 됩니다. 그러니 제가 손으로 하는 거죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>마감표하고 본사 집계 숫자가 다른 경우도 있나요?</p></div><div class="qa a"><span class="who">서동민</span><p>있습니다. 밤 11시 넘어 들어온 배달은 마감표엔 빠지고 집계엔 잡힙니다. 영업지원팀 말로는 강남점은 하루 열 건 안팎이라더군요.</p></div><div class="qa a"><span class="who">최영호</span><p>열 건이면 패티 열몇 장이에요. 그 정도는 제가 머릿속으로 얹어서 봅니다.</p></div><div class="qa a"><span class="who">윤가희</span><p>마감하다 보면 문 닫기 직전에 배달이 꼭 두세 건 들어와요. 그건 마감표 뽑고 나서 만드는 거예요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>옮겨 적고 나서는 무엇을 보시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>평소보다 확 튄 건 동그라미를 쳐 둡니다. 어제 패티가 평소보다 백 장 더 나갔다, 그럼 이유가 있는 거예요. 튄 날은 어제 행사가 있었는지 찾아봐요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>행사 정보는 어디서 확인하세요?</p></div><div class="qa a"><span class="who">최영호</span><p>본사 공지방이요. 쿠폰이며 배달앱 할인이며 다 거기 올라오는데, 하루에도 공지가 열 개씩 붙습니다. 공지방을 한참 올려 가면서 쿠폰 공지를 찾아요.</p></div><div class="qa a"><span class="who">윤가희</span><p>저도 같이 찾아 드린 적 있어요. 신메뉴, 위생 공지, 행사가 다 한 방에 섞여 있어서, 한 번은 이십 분 가까이 올렸어요.</p></div><div class="qa a"><span class="who">서동민</span><p>위생 공지도 저희 팀이 그 방에 올립니다. 저희 공지가 행사 공지를 덮고 있는 셈이라 할 말이 없네요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>어제 말고 오늘 변수는 어떻게 보세요?</p></div><div class="qa a"><span class="who">최영호</span><p>날씨는 비 소식이 있는지부터 봐요. 비 오면 홀은 줄고 배달이 늘어납니다. 금요일은 무조건 많고 월요일은 적고요. 근처 오피스에 행사 있는지 점장님한테 물어봐요. 건너편 빌딩에 세미나라도 잡히면 점심이 두 배가 됩니다.</p></div><div class="qa a"><span class="who">윤가희</span><p>배달앱 할인 붙는 날은 제가 주임님께 미리 말씀드려요. 저희가 태블릿을 바로 앞에서 보니까 할인이 걸리면 먼저 알거든요. 지난주 화요일에 할인 붙은 걸 늦게 봐서 양상추가 열두 시 조금 넘어 떨어졌어요.</p></div><div class="qa a"><span class="who">최영호</span><p>할인은 가희가 제일 먼저 압니다. 태블릿 앞에 서 있는 사람이 가희니까요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>날씨 예보는 얼마나 맞나요?</p></div><div class="qa a"><span class="who">최영호</span><p>오전 비는 대충 맞고 오후 비는 반반입니다. 오후에 날이 개 버리면 줄여 놓은 양상추가 아쉽죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그렇게 본 건 어디에 남기시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>비, 금요일, 쿠폰 이렇게 공책 맨 위에 적어 둡니다. 그 아래에 어제 숫자가 있고요. 공책 한 권이 석 달 갑니다. 서랍에 열 권 넘게 쌓여 있어요.</p></div><div class="qa a"><span class="who">윤가희</span><p>그 공책 주임님 말고는 아무도 못 읽어요. 줄임말이 많아서요. 양상추를 &quot;양&quot;, 토마토를 &quot;토&quot; 이렇게 쓰세요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>출근해서 거기까지 시간이 얼마나 드나요?</p></div><div class="qa a"><span class="who">최영호</span><p>숫자 정하는 데까지 매일 40분은 들어갑니다. 8시에 와서 8시 40분. 그동안 저는 도마 앞에 못 섭니다.</p></div><div class="qa a"><span class="who">서동민</span><p>다른 직영점도 아침에 이걸 하긴 합니다. 점장님이 하는 데도 있고 주임이 하는 데도 있는데, 순회 가서 물어보면 짧은 데가 30분, 긴 데는 한 시간이라고 합니다. 매장마다 공책 모양도 다 다르고요.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 2</span><span class="nm">2. 품목별 준비 수량 결정</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>이제 품목별 숫자를 정하실 차례인데요. 어떻게 정하시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>어제 숫자에 날씨랑 요일을 얹어서 품목마다 숫자를 잡아요. 계산식은 없습니다. 솔직히 말씀드리면 제 감이에요. 양상추처럼 하루 지나면 못 쓰는 건 조금 덜 잡아요. 냉동 패티처럼 버티는 건 넉넉히 잡고요. 남아서 버리는 거하고 모자라서 피크 때 급하게 써는 거, 어느 쪽이 덜 아픈지가 품목마다 다릅니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>감이라고 하셨는데, 예를 하나 들어 주실 수 있나요?</p></div><div class="qa a"><span class="who">최영호</span><p>어제 버거가 칠백 개 조금 넘게 나갔고 오늘 비 예보가 있다. 그럼 양상추는 4킬로 잡던 걸 3킬로 반으로 내립니다. 대신 배달이 늘 테니 소스는 한 통 더 채우고요. 그 반 킬로가 어디서 나오냐고 물으시면, 설명은 못 합니다.</p></div><div class="qa a"><span class="who">윤가희</span><p>저도 주임님 옆에서 따라 적어 본 적 있어요. 제가 쓴 숫자랑 주임님 숫자가 반은 달랐어요. 반? 아니, 반보다 많았던 것 같아요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>본사에서 정한 기준은 없나요?</p></div><div class="qa a"><span class="who">서동민</span><p>운영 매뉴얼에 전일 판매량의 1.1배라는 문구가 있습니다. 저희 팀 문서가 아니라 운영팀 문서인데, 상권 차이가 안 들어간 숫자라 그대로 쓰는 매장은 거의 없습니다. 강남점도 마찬가지고요.</p></div><div class="qa a"><span class="who">최영호</span><p>그대로 하면 비 오는 월요일엔 양상추가 산더미로 남습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>패티는 다른 품목과 정하는 방식이 다른가요?</p></div><div class="qa a"><span class="who">최영호</span><p>패티는 하루 앞을 봅니다. 해동이 12시간이라 내일 쓸 패티를 오늘 꺼내 둬야 해요. 그러니 오늘 아침에 내일 숫자까지 같이 정하는 겁니다. 여기서 틀리면 이틀이 꼬여요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>주임님이 안 계시는 날은 누가 정하나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>주임님 휴무인 날은 이걸 정할 사람이 없어요. 부주방님이 하시긴 하는데 어제 숫자 보고 맞추시는 정도라서요. 지난달 주임님 연차 때 양상추가 점심에 떨어졌어요. 열두 시 반쯤이요. 그날 저는 피크 한가운데서 양상추를 썰었어요.</p></div><div class="qa a"><span class="who">최영호</span><p>적어 둔 게 없으니까요. 제 머릿속에 있는 걸 누가 꺼내 쓰겠습니까.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>부주방님이 정한 날 숫자는 어땠나요?</p></div><div class="qa a"><span class="who">최영호</span><p>다음 날 와서 공책을 보면 압니다. 양상추는 많고 패티는 모자라요. 패티는 하루 전에 꺼내야 하는데 그걸 놓치시거든요.</p></div><div class="qa a"><span class="who">윤가희</span><p>그다음 날 오후엔 해동 덜 된 패티가 나와서 다들 발을 동동 굴렀어요. 과장님 앞에서 이 얘기 해도 되나 모르겠네요.</p></div><div class="qa a"><span class="who">서동민</span><p>지금 들었어요. 그건 나중에 따로 여쭤보죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>정하신 숫자가 얼마나 맞는지 따져 보신 적이 있나요?</p></div><div class="qa a"><span class="who">최영호</span><p>따로 적진 않습니다. 몸이 기억하죠.</p></div><div class="qa a"><span class="who">서동민</span><p>그건 제가 한 번 봤습니다. 작년 가을에 강남점 마감 기록 한 달 치를 받아서 준비 수량하고 실제 쓴 양을 맞춰 봤어요. 위아래 10% 안에 든 날을 맞은 날로 쳤는데, 맞은 날이 60%였습니다. 틀린 날은 많이 잡은 쪽이 더 많았고요. 그 뒤로는 다시 못 봤습니다.</p></div><div class="qa a"><span class="who">최영호</span><p>많이 잡는 건 일부러 그러는 겁니다. 피크 때 떨어지는 것보다는 저녁에 버리는 게 낫습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>숫자를 잡고 나면 바로 확정하시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>아직이요. 어제 썰어 둔 게 얼마 남았는지 봐야 합니다. 워크인 냉장고 문 열고 통을 하나씩 세는 거예요. 양상추 몇 통, 토마토 몇 통, 소스 몇 통. 남은 만큼 빼서 숫자를 고쳐요.</p></div><div class="qa a"><span class="who">윤가희</span><p>작년에 냉장고를 큰 걸로 바꿨는데 세는 시간은 그대로예요. 통 개수가 줄어든 게 아니니까요. 제가 오전조 들어가는 주에는 그게 제일 답답해요. 주임님이 냉장고 세시는 동안 저희는 칼 들고 서 있어요. 썰 양이 안 나왔으니까요. 매일 20분은 그렇게 서 있어요. 칼 갈고 도마 닦는 것도 5분이면 끝나거든요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>남은 양 말고 냉장고에서 또 보시는 게 있나요?</p></div><div class="qa a"><span class="who">최영호</span><p>날짜요. 라벨 날짜 보고 못 쓰는 건 빼요. 손질 야채는 24시간이라 어제 아침에 썬 건 오늘 아침이 끝입니다. 오늘 넘어가는 건 먼저 쓰게 앞으로 빼요. 통이 마흔 개가 넘는데 라벨을 통마다 하나씩 들어서 날짜를 읽어요. 유성펜으로 쓴 거라 번진 것도 있고요.</p></div><div class="qa a"><span class="who">서동민</span><p>손질 야채 24시간, 소스 48시간, 해동 패티 72시간. 그 기준은 저희 팀이 정했습니다. 라벨 빠진 통은 언제 만든 건지 알 수가 없으니 멀쩡해도 버려야 하고요. 강남점은 그나마 라벨이 잘 붙어 있는 매장입니다.</p></div><div class="qa a"><span class="who">윤가희</span><p>라벨은 오전조가 쓰는데 저는 숫자를 크게 써요. 주임님 읽기 편하시라고요. 다른 친구들은 작게 써서 주임님이 눈을 찡그리고 보세요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>남은 양하고 라벨까지 보고 나면 숫자가 많이 바뀌나요?</p></div><div class="qa a"><span class="who">최영호</span><p>많이 바뀌는 날은 다섯 품목, 적으면 두 품목입니다. 소스가 제일 자주 바뀌어요. 48시간이라 어제 배합한 게 남아 있으면 오늘은 안 만들어도 되니까요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>다 보고 나면요?</p></div><div class="qa a"><span class="who">최영호</span><p>고친 숫자로 수량표를 다시 써요. 공책 한 장에 품목, 준비할 양, 남은 양. 그게 끝나면 9시 가까이 됩니다.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 3</span><span class="nm">3. 준비 계획 공유</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>수량표가 나오면 주방에는 어떻게 알리시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>확정한 숫자를 주방 보드에 품목별로 쭉 적어요. 화이트보드요. 품목 옆에 누가 썰지 이름을 붙여 두고, 오픈 전까지 끝낼 건 별표를 쳐요. 10시 반 오픈이니까 소스하고 양상추는 늘 별표입니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>보드에는 몇 줄이나 적히나요?</p></div><div class="qa a"><span class="who">최영호</span><p>스무 줄쯤이요. 보드 하나가 꽉 찹니다. 숫자 옆에 단위까지 써야 해서 글씨가 점점 작아져요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>보드에만 적으시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>보드에 쓴 걸 단톡방에 또 쳐서 올려요. 9시 반에 오는 친구들, 오후조 친구들까지 늦게 들어오는 친구들도 봐야 하니까요. 같은 걸 두 번 쓰는 데 매일 15분은 갑니다.</p></div><div class="qa a"><span class="who">윤가희</span><p>주임님 바쁘실 땐 제가 보드 사진을 찍어서 단톡방에 올려요. 그게 빠르거든요. 문제는 형광등이 반사돼서 숫자가 잘 안 보인다는 거예요. 결국 주임님이 다시 치세요. 방에 열네 명? 열다섯 명? 파트타임까지 다 들어와 있어서 사진이 금방 위로 밀려 올라가기도 하고요.</p></div><div class="qa a"><span class="who">최영호</span><p>보드도 처음부터 있던 게 아닙니다. 오픈 때는 A4에 써서 냉장고 문에 붙였어요. 지우고 고치기 편해서 보드로 바꾼 거고요. 그때도 냉장고 문에 붙은 종이 보고 다들 칼을 잡았어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>단톡방에 올린 계획은 주로 누가 보나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>오후조 친구들이 버스에서 봐요. 자기 이름 있나 보고 오는 거예요. 이름이 보드에만 있고 단톡방엔 빠진 날은 와서 놀라고요. 지난주에도 한 명이 자기 거 없는 줄 알고 느긋하게 왔다가 양파 한 판을 받았어요.</p></div><div class="qa a"><span class="who">최영호</span><p>그건 제가 옮기다 빠뜨린 겁니다. 스무 줄을 두 번 쓰다 보면 한 줄씩 빠져요. 빠진 줄이 하필 양파면 오후가 꼬입니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>본사에서도 이 계획을 보시나요?</p></div><div class="qa a"><span class="who">서동민</span><p>못 봅니다. 보드는 저녁에 지워지니 남는 게 없고, 단톡방은 매장 방이라 저희가 들어가 있지 않습니다. 순회 나가는 날에만 보드를 보는데 강남점은 한 달에 한 번 갑니다. 갈 때마다 보드를 찍어 오긴 합니다. 한 달에 하루 치라 앞뒤로 비교할 게 없어서 폴더에 쌓이기만 하죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>준비 계획에도 본사 양식이 있나요?</p></div><div class="qa a"><span class="who">서동민</span><p>없습니다. 위생 점검표는 서른두 칸짜리 양식이 있는데 준비 계획은 매장 재량입니다. 그래서 매장마다 보드에 쓰는 방식이 다 다릅니다. 품목을 세로로 쓰는 데, 사람 이름을 먼저 쓰는 데, 시간대별로 나누는 데도 있고요.</p></div><div class="qa a"><span class="who">윤가희</span><p>역삼점에서 넘어온 친구가 그랬어요. 거기는 보드에 품목 대신 시간이 적혀 있대요. 9시 양상추, 9시 반 토마토 이렇게요. 처음 와서 저희 보드는 한참 못 읽더라고요. 자기 이름이 어디 있는지 몰라서 첫날은 제 옆에서 토마토 꼭지만 땄어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>계획을 다 알리고 나면 몇 시쯤 되나요?</p></div><div class="qa a"><span class="who">최영호</span><p>9시 15분쯤이요. 그때부터 저도 칼을 잡습니다. 오픈까지 한 시간 십오 분 남는데, 그 안에 소스 배합하고 내일 쓸 패티까지 해동칸에 옮겨야 해요. 계획이 10분 늦게 나오면 오픈 직전이 10분 더 급해집니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>보드를 보고 라인에서는 어떻게 움직이시나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>보드 보고 제 이름 옆에 체크해요. 봤다는 표시예요. 오늘 양이 많다 싶으면 바로 주임님께 말씀드려요. 혼자 토마토 다섯 판이면 오픈 전에 절대 못 끝내거든요.</p></div><div class="qa a"><span class="who">최영호</span><p>그럼 순서를 바꿉니다. 사람이 비면 소스부터 하고 토마토는 뒤로 미룹니다. 소스는 배합하고 식히는 시간이 있어서 늦게 시작하면 오픈에 못 맞춰요. 토마토는 첫 손님 들어올 때 썰어도 됩니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>체크를 안 하고 넘어가는 분도 있나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>파트타임 친구들은 깜빡해요. 출근해서 앞치마 매고 바로 손부터 씻으니까요. 씻고 나면 도마 앞에 서기 바빠서 보드까지 갈 틈이 없어요.</p></div><div class="qa a"><span class="who">최영호</span><p>그래서 9시 20분에 제가 한 바퀴 돕니다. 이름 불러서 네 거 봤냐고 묻습니다. 대답 안 하면 보드 앞에 세웁니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>바뀐 내용은 어떻게 알리세요?</p></div><div class="qa a"><span class="who">최영호</span><p>바뀐 건 보드에 줄 긋고 다시 써요. 단톡방은 못 고칠 때가 많습니다. 손이 모자라서요.</p></div><div class="qa a"><span class="who">윤가희</span><p>오후조 친구들은 단톡방 숫자 보고 왔다가 보드랑 달라서 헷갈려 해요. 어느 게 맞냐고 저한테 물어보고요. 저도 그날 아침에 있었으면 알지만, 마감조 주면 저도 몰라요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>둘이 다르면 어느 쪽을 따르나요?</p></div><div class="qa a"><span class="who">최영호</span><p>보드입니다. 마지막에 고친 게 보드니까요. 그걸 아는 사람이 저하고 가희 정도라는 게 문제죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>순서가 바뀌는 날 품질 쪽에서 보시는 문제도 있나요?</p></div><div class="qa a"><span class="who">서동민</span><p>있습니다. 급하게 썬 날은 라벨이 빠지는 일이 많습니다. 순회 때 라벨 없는 통을 찾아서 언제 만든 거냐고 물어보면, 대부분 그날 아침에 순서가 바뀌어서 정신없이 넣은 통이더라고요.</p></div><div class="qa a"><span class="who">최영호</span><p>그건 제 쪽 잘못 맞습니다. 오픈 30분 전이면 라벨보다 통을 먼저 넣게 돼요.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 4</span><span class="nm">4. 준비 실적 대비 확인</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>하루가 끝나면 아침에 정한 숫자가 맞았는지 확인하시나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>마감 때 해요. 마감 서는 주에는 제가 하는데, 통마다 남은 걸 저울에 달아요. 아침 숫자에서 남은 걸 빼면 쓴 양이 나와요. 버린 건 따로 칸에 적어요. 피크 지나고 시든 양상추 같은 거요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>저울에 다는 데 시간은 얼마나 걸리나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>삼십 분은 걸려요. 통이 마흔 개가 넘으니까요. 마감 맨 마지막 일이라 다들 빨리 가고 싶어 하는데, 그래도 저는 하나도 안 빼고 달아요. 처음 배울 때 주임님이 그렇게 시키셨거든요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그 기록은 어디로 가나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>다 적으면 파일에 끼워서 사무실에 둬요. 그게 끝이에요. 적긴 다 적는데, 그걸 다시 펴 보는 사람은 없어요. 파일이 벌써 여덟 권째예요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>언제부터 적기 시작하신 건가요?</p></div><div class="qa a"><span class="who">윤가희</span><p>제가 들어오기 전부터요. 첫 권은 주임님이 시작하셨대요. 3년? 아니, 그보다 오래됐을 거예요.</p></div><div class="qa a"><span class="who">최영호</span><p>4년 됐습니다. 본사 점검 때 적으라고 해서 시작했어요. 적으라고는 했는데 그걸로 뭘 하라는 말은 없었습니다.</p></div><div class="qa a"><span class="who">서동민</span><p>그건 맞습니다. 점검표에 기록이 있는지 확인하는 칸만 있고, 내용을 보는 칸은 없거든요.</p></div><div class="qa a"><span class="who">최영호</span><p>저도 안 봅니다. 아침에 그거 펼 시간이 없어요. 어제 남은 건 냉장고에 다 들어 있으니까 냉장고를 보지 파일은 안 봅니다.</p></div><div class="qa a"><span class="who">서동민</span><p>아까 말씀드린 한 달 치가 그 파일입니다. 그때 계산해 보니 강남점은 준비한 양의 7%를 버리고 있었습니다. 양상추하고 토마토가 대부분이었고요. 폐기 금액으로 따지면 직영 열두 곳 중에 세 번째로 높았습니다. 그 숫자는 운영팀에만 보고했고, 매장에는 따로 내려보내지 않았습니다.</p></div><div class="qa a"><span class="who">최영호</span><p>7%는 오늘 처음 듣습니다. 버리는 게 적지 않다는 건 알았는데 숫자로 들으니 다르네요.</p></div><div class="qa a"><span class="who">윤가희</span><p>양상추 버릴 때마다 저 혼자 중얼거려요. 한 통이면 버거 몇 개 치인데, 하고요. 마감 때 버린 칸 적으면서 제일 기분이 안 좋아요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>모자란 날은 어떻게 남기시나요?</p></div><div class="qa a"><span class="who">윤가희</span><p>떨어진 시간이랑 품목을 적어 둬요. &quot;번 저녁 7시 40분&quot; 이런 식으로요. 일주일에 다섯 번은 뭐가 떨어져요. 많은 주는 하루에 두 번 떨어진 날도 있었고요. 적는 건 피크 끝나고 해요. 떨어질 땐 적을 정신이 없으니까 시간이 10분씩은 틀릴 거예요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>왜 남았는지, 왜 모자랐는지도 따로 적으시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>적습니다. 왜 남았는지, 왜 모자랐는지 원인을 적어요. 비가 예보보다 일찍 그쳤다든지, 단체 주문이 들어왔다든지. 그건 일요일 마감 때 일주일 치를 몰아서 써요. 평일엔 쓸 틈이 없습니다.</p></div><div class="qa a"><span class="who">윤가희</span><p>일요일에 물어보시면 기억이 잘 안 나요. 수요일에 토마토가 왜 모자랐냐고 하시면 바로 말을 못 해요. 그럼 주임님 공책을 같이 들여다봐요. 맨 위에 단체라고 적혀 있으면 그 때문인 거고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>다 적은 원인은 어디로 보내시나요?</p></div><div class="qa a"><span class="who">최영호</span><p>다 쓰면 본사 양식에 옮겨서 보내요. 품질팀에서 만든 양식입니다.</p></div><div class="qa a"><span class="who">서동민</span><p>네, 저희 팀 양식입니다. 열두 개 매장 걸 모아서 같은 원인이 반복되는지 봅니다. 양식 취합은 저 혼자 합니다. 팀이 두 명인데 다른 한 명은 신메뉴 품질 검사를 맡고 있어서요. 매장에서 일주일 치씩 올라오니까 한 달이면 마흔여덟 장입니다. 매장마다 칸을 고쳐 쓰는 데가 있어서 칸 맞추는 데만 반나절이 걸립니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>양식에는 어떤 칸이 있나요?</p></div><div class="qa a"><span class="who">서동민</span><p>날짜, 품목, 폐기량, 품절 시각, 원인. 다섯 칸입니다. 원인 칸은 고르는 게 아니라 쓰는 칸이라 매장마다 말이 다릅니다. 비, 우천, 날씨 탓. 같은 얘기를 세 가지로 쓰니 그걸 제가 하나로 묶는 거죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>반복되는 원인이 나오면 어떻게 하시나요?</p></div><div class="qa a"><span class="who">서동민</span><p>같은 원인이 세 번 나오면 매장에 개선 요청을 내립니다. 강남점은 작년에 비 오는 날 양상추 과다가 넉 달 내리 나왔어요. 그래서 비 예보가 있는 날은 양상추를 한 판 줄이라고 요청을 내렸습니다.</p></div><div class="qa a"><span class="who">최영호</span><p>그 요청은 받았습니다. 받았을 땐 제가 이미 한 판씩 줄이고 있었어요. 요청서가 석 달쯤 뒤에 왔거든요. 그사이 비 오는 날이 열 번은 넘었을 겁니다.</p></div><div class="qa a"><span class="who">윤가희</span><p>그 요청서도 파일에 같이 끼워져 있어요. 저도 마감하다가 처음 봤어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>품절이 나면 그날 주방은 어떻게 되나요?</p></div><div class="qa a"><span class="who">최영호</span><p>피크 한가운데서 누군가 칼을 잡아야 합니다. 지난주 목요일엔 토마토가 한 시 조금 전에 떨어져서 제가 그릴에서 빠져 썰었습니다. 그 10분 동안 주문이 스무 건 넘게 밀렸어요.</p></div><div class="qa a"><span class="who">윤가희</span><p>그날 저는 주임님 그릴까지 같이 봤어요. 패티 두 장 태웠고요. 그것도 버린 칸에 적었어요.</p></div></div></details></div>
+<div class="foot"><a class="back" href="step2.html">← 2차 실습 안내로</a></div>
+</div></body>
+</html>

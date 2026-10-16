@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상품기획 2차 실습 — 판매 실적 분석</title>
+<style>@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f8fafc;color:#1f2937;line-height:1.65;
+    font-family:"Presentation","Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;font-size:16px}
+  h1,h2,h3,.grp,.card .nm,.guide .t,.rules .t,.who,.tab,.box .nm{
+    font-family:"Paperozi","Presentation","Malgun Gothic",system-ui,sans-serif}
+  .wrap{max-width:680px;margin:0 auto;padding:16px 18px 60px}
+  .wide .wrap{max-width:1560px}
+  a{color:#1d4ed8;text-decoration:none}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;
+    color:#4b5563;background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:6px 14px;margin:4px 0 14px}
+  .chip{display:inline-block;border-radius:6px;color:#fff;font-size:12px;font-weight:700;padding:2px 8px}
+  h1{font-size:23px;margin:6px 0 2px;line-height:1.35}
+  .meta{color:#6b7280;font-size:14px;margin-bottom:14px}
+  .guide{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px 16px;margin:14px 0 20px}
+  .guide .t{font-weight:800;font-size:14px;margin-bottom:6px}
+  .guide ul,.guide ol{margin:0;padding-left:18px;font-size:14px}
+  .guide li{margin:3px 0;word-break:keep-all}
+  .guide b{color:#b45309}
+  h2{font-size:18px;margin:26px 0 8px;padding-left:10px;border-left:4px solid #cbd5e1}
+  .qa{margin:12px 0}
+  .who{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+  .q .who{color:#6b7280}
+  .a .who{color:#1d4ed8}
+  .q p,.a p{margin:0;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 14px}
+  .a p{background:#eff6ff;border-color:#bfdbfe}
+  .foot{margin-top:34px;padding-top:14px;border-top:1px solid #e5e7eb;text-align:center}
+  .lead{color:#4b5563;font-size:15px;margin:4px 0 18px}
+  .rules{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 18px;margin-bottom:22px}
+  .rules .t{font-weight:800;margin-bottom:8px}
+  .rules ol,.rules ul{margin:0;padding-left:20px;font-size:14.5px}
+  .rules li{margin:6px 0;word-break:keep-all}
+  .grp{font-size:16px;font-weight:800;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+  .card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;margin:10px 0;color:inherit}
+  .card .nm{font-weight:800;font-size:16.5px}
+  .card .who2{color:#6b7280;font-size:14px;margin-top:2px}
+  .card .l5{color:#92400e;font-size:13px;margin-top:6px;word-break:keep-all}
+  .card .go{float:right;color:#9ca3af;font-size:18px}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+  .links a{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+  .tab{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;color:#fff;opacity:.55}
+  .tab.on{opacity:1;box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor}
+  .panel{display:none}
+  .panel.on{display:block}
+
+  .pyr{margin:10px 0 30px}
+  .pyr .row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+  .pyr .grps{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:flex-start}
+  .pyr .g3{flex:1 1 300px;min-width:0;max-width:480px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .pyr .kids{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .box{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1.5px solid #cbd5e1;border-radius:10px;padding:7px 10px;font-size:14px;line-height:1.4;word-break:keep-all;min-width:0}
+  .box .lv{flex:none;border-radius:6px;color:#fff;font-size:11px;font-weight:800;padding:1px 6px;margin-top:2px}
+  .box.l1,.box.l2{font-weight:800;font-size:15px;min-width:min(220px,100%);justify-content:center}
+  .box.l3{font-weight:800;background:#f0fdf4}
+  .box.l4{background:#fffbeb}
+  .box.l4.hot{border:3px solid #a16207;background:#fef3c7;font-weight:800}
+  .box.l5{background:#faf5ff;font-size:13px;margin-left:22px}
+  .box.l5.star{border:2.5px solid #9333ea;font-weight:800}
+  .pyr .l5s{display:flex;flex-direction:column;gap:4px;margin:4px 0 2px}
+  .ans .l6s{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-top:10px}
+  .ans .l6g{flex:1 1 320px;min-width:0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .ans .box.l6{background:#fdf2f8;font-weight:800}
+  .ans .out{font-size:12.5px;color:#9d174d;margin:4px 0 6px 4px}
+  .ans .l7{display:flex;gap:8px;align-items:flex-start;border:1.5px solid #fecaca;background:#fff;border-radius:10px;padding:6px 10px;margin:6px 0;font-size:13.5px}
+  .ans .ev{display:block;color:#6b7280;font-size:12px;margin-top:2px}
+  .ans .wrong{background:#f1f5f9;border:1px dashed #94a3b8;border-radius:10px;padding:8px 12px;font-size:13px;margin-top:10px}
+  .ans .wrong b{color:#475569}
+
+  .tabs.v2{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0 18px}
+  .tabs.v2 .tab{opacity:1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;
+    padding:9px 8px;border-radius:10px;font-size:15px;line-height:1.2;word-break:keep-all;cursor:pointer;
+    background:#fff;color:var(--c);border:2px solid var(--c);box-shadow:0 3px 0 #cbd5e1;
+    transition:transform .08s,box-shadow .08s,background .12s}
+  .tabs.v2 .tab:hover{background:color-mix(in srgb,var(--c) 10%,#fff)}
+  .tabs.v2 .tab:active{transform:translateY(2px);box-shadow:0 1px 0 #cbd5e1}
+  .tabs.v2 .tab.on{background:var(--c);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.28)}
+  .pyr .top{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 16px;padding-bottom:14px;border-bottom:1px dashed #cbd5e1}
+  .pyr .vc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .pyr .vc .l2s{display:flex;flex-direction:row;gap:6px;padding:6px 6px 0;margin:0 6px;border-top:2px solid #e5e7eb}
+  .pyr .vc .box{min-width:0;justify-content:center;font-size:14px}
+  .pyr .vc .l2s .box{flex:1 1 0}
+  .pyr .vc .box.l1{font-size:15px}
+  .pyr .vc .box.own{border-width:2.5px;border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 18%,transparent)}
+  .pyr .vc a.box{color:inherit;cursor:pointer;box-shadow:0 2px 0 #cbd5e1}
+  .pyr .vc a.box:hover{border-color:#94a3b8;background:#fff}
+  .pyr .vc a.box:active{transform:translateY(1px);box-shadow:none}
+  .box.dim{color:#9ca3af;background:#f3f4f6;border-color:#e5e7eb;font-weight:600}
+  .box.dim .lv{background:#b0b7c3!important}
+  .pyr .vc.dim .l2s{border-top-color:#eef0f3}
+  .pyr .hint{font-size:12.5px;color:#6b7280;text-align:center;margin:-8px 0 14px}
+  @media (max-width:640px){
+    .tabs.v2{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .tabs.v2 .tab{font-size:14px;padding:8px 4px;min-height:40px}
+    .pyr .top{flex-direction:column;align-items:stretch}
+    .pyr .vc{flex:1 1 auto}
+    .pyr .vc .box{font-size:13px;padding:6px 8px}
+    .pyr .vc a.box.l2{min-height:42px;align-items:center}
+    .pyr .vc .box.l1{font-size:14px}
+  }
+
+  .path{margin:4px 0 12px}
+  .path .row{margin:0 0 6px}
+  .path .row .box{flex:0 1 auto;margin:0}
+  .path .row .box.own{border-width:2.5px;font-weight:800}
+  .path .row .box.l1,.path .row .box.l2{min-width:0;font-size:14.5px}
+  .path .row .box.l1.own,.path .row .box.l2.own{border-color:var(--c)}
+  .path .row .box.l3.own{border-color:#16a34a}
+  .path .row .box.l4.own{border-color:#a16207}
+  .box.l5.cur{border:2.5px solid #9333ea;background:#f3e8ff;font-weight:800}
+  .path .chain{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:10px}
+  .path .chain .arrow{color:#94a3b8;font-weight:800}
+  .path .chain .box{flex:0 1 auto}
+  .pyr .vc .box.own{box-shadow:none}
+  h1+.path{margin-top:0}
+  /* 트리 */
+  .tree{margin:14px auto 26px;max-width:960px}
+  .grp.sep{border-top:1px solid #e5e7eb;padding-top:16px;margin-top:26px}
+  .tree .root{display:flex;justify-content:center}
+  .tree .root .box{min-width:0;margin:0;font-weight:800}
+  .tree .l6cols{display:flex;gap:18px;align-items:flex-start;justify-content:center;position:relative;padding-top:18px}
+  .tree .l6col{flex:1 1 0;min-width:0;position:relative;padding-top:18px}
+  .tree .l6col::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .l6col::after{content:"";position:absolute;top:0;height:2px;background:#94a3b8;left:0;right:0}
+  .tree .l6col:first-child::after{left:50%}
+  .tree .l6col:last-child::after{right:50%}
+  .tree .l6col:only-child::after{display:none}
+  .tree .l6cols::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .box.l6{background:#fdf2f8;font-weight:800;justify-content:flex-start;min-height:42px}
+  .tree .l7s{position:relative;margin:8px 0 0 22px;padding-left:16px;display:flex;flex-direction:column;gap:6px}
+  .tree .l7s::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:#94a3b8}
+  .tree .l7{position:relative}
+  .tree .l7::before{content:"";position:absolute;left:-16px;top:19px;width:16px;height:2px;background:#94a3b8}
+  .tree .l7:last-child::after{content:"";position:absolute;left:-17px;top:21px;bottom:-8px;width:4px;background:#f8fafc}
+  .tree .l7 .box{min-height:38px;font-size:13.5px}
+  .tree .l7 .box.l7{background:#fff;border-color:#fecaca}
+  .tree .box.blank{background:#fff;border-style:dashed;color:#cbd5e1}
+  .tree .box.blank .nm{flex:1;min-height:18px}
+  .tree .out{font-size:12.5px;color:#9d174d;margin:4px 0 0 4px}
+  /* 근거 (?) */
+  .ev{display:none;font-size:12.5px;color:#475569;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:5px 9px;margin:4px 0 0 4px;word-break:keep-all}
+  .ev b{color:#1f2937}
+  .show-ev .ev{display:block}
+  .qbtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    border:2px solid #475569;background:#fff;color:#475569;font-weight:800;font-size:16px;cursor:pointer;margin-left:8px;vertical-align:middle}
+  .qbtn.on{background:#475569;color:#fff}
+  .qrow{display:flex;align-items:center;gap:8px;margin:14px 0 6px;font-weight:800;font-size:15px}
+  .qrow .hint2{font-weight:500;color:#6b7280;font-size:13px}
+  /* 병목·지연·낭비 마킹 */
+  .bdw{display:inline-block;flex:none;border-radius:6px;font-size:11px;font-weight:800;padding:1px 6px;margin-left:6px;color:#fff;letter-spacing:.02em}
+  .bdw-B{background:#dc2626}.bdw-D{background:#ca8a04}.bdw-W{background:#2563eb}
+  .box.has-B{border-color:#dc2626;background:#fee2e2}
+  .box.has-D{border-color:#ca8a04;background:#fef9c3}
+  .box.has-W{border-color:#2563eb;background:#dbeafe}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:#4b5563;margin:4px 0 14px}
+  .legend span{display:inline-flex;align-items:center;gap:4px}
+  /* 카드(2차) */
+  .cards{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+  details.card{padding:0;overflow:hidden}
+  details.card summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  details.card summary::-webkit-details-marker{display:none}
+  details.card summary .no{flex:none;border-radius:8px;background:#1f2937;color:#fff;font-weight:800;font-size:13px;padding:3px 9px}
+  details.card summary .nm{font-weight:800;font-size:16px}
+  details.card summary .sub{color:#6b7280;font-size:13.5px;width:100%;word-break:keep-all}
+  details.card summary .done{background:#dcfce7;color:#166534;border-radius:999px;font-size:12px;font-weight:800;padding:2px 9px}
+  details.card summary .open{margin-left:auto;color:#9ca3af;font-size:13px}
+  details.card[open] summary{border-bottom:1px solid #e5e7eb;background:#f8fafc}
+  details.card .body{padding:6px 16px 14px}
+  .step{display:inline-block;background:#1f2937;color:#fff;border-radius:999px;font-size:12px;font-weight:800;padding:2px 10px;margin-bottom:6px}
+  @media (max-width:640px){
+    /* 경로: 들여쓰기 목록 — 줄마다 한 단씩 들여 쓰고 왼쪽 레일·꺾은선으로 "위 줄의 자식"을 보인다 */
+    .path .row{justify-content:flex-start;gap:6px;position:relative;margin:0 0 2px;padding:3px 0 3px 14px}
+    .path .row .box{font-size:13px;padding:5px 8px}
+    .path .row .box.l1,.path .row .box.l2{font-size:13.5px}
+    .path .row.r1{padding-left:0}
+    .path .row .box.own,.path .row .box.cur{order:-1}   /* 자기 상자를 줄 맨 앞에 — 꺾은선이 그 상자에 닿는다 */
+    .path .row.r3{margin-left:14px}.path .row.r4{margin-left:28px}.path .row.r5{margin-left:42px}
+    .path .row:not(.r1)::before{content:"";position:absolute;left:0;top:-8px;width:2px;height:28px;background:#cbd5e1}
+    .path .row:not(.r1)::after{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:#cbd5e1}
+    .tree .l6cols{flex-direction:column;gap:14px;padding-top:0}
+    .tree .l6cols::before{display:none}
+    .tree .l6col{padding-top:0;padding-left:18px}
+    .tree .l6col::before{left:6px;top:-14px;height:calc(100% + 14px);width:2px}
+    .tree .l6col::after{top:21px;left:6px;right:auto;width:12px;height:2px}
+    .tree .l6col:first-child::after,.tree .l6col:last-child::after{left:6px;right:auto}
+    .tree .l6col:last-child::before{height:35px}
+    .tree .l7s{margin-left:14px}
+  }
+</style>
+</head>
+<body><div class="wrap">
+<a class="back" href="step2.html">← 2차 실습 안내로</a>
+<span class="step">2차 실습 · 상품기획</span>
+<h1>판매 실적 분석 — 그룹 인터뷰</h1>
+<div class="path pyr" style="--c:#1e3a8a"><div class="row r1"><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">시장·고객 이해</span></div><div class="box l1 own"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">상품 개발</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">공급·생산</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">판매·서비스</span></div></div><div class="row r2"><div class="box l2 own"><span class="lv" style="background:#0e7490">L2</span><span class="nm">상품기획</span></div></div><div class="row r3"><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">메뉴 개발</span></div><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">레시피 표준화</span></div><div class="box l3 own"><span class="lv" style="background:#15803d">L3</span><span class="nm">메뉴 운영 관리</span></div></div><div class="row r4"><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">메뉴판·POS 등록</span></div><div class="box l4 own"><span class="lv" style="background:#a16207">L4</span><span class="nm">판매 실적 분석</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">단종 메뉴 선정</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">시즌 메뉴 교체 계획</span></div></div><div class="row r5"><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">채널별 판매 데이터 수집</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">메뉴명 기준 정합화</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">메뉴별 실적표 작성</span></div><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">실적 리뷰·공유</span></div></div></div>
+<div class="guide"><div class="t">짝 실습</div>
+<ul><li><b>두 명씩 짝</b>을 지어 인터뷰 2·3·4 가운데 하나를 맡고, 앞에서 했던 것처럼 <b>L6 → L7</b> 로 정리해 주세요.</li>
+<li>L6 는 완결 산출물이 남는 단위 업무, L7 은 도구를 바꿔도 살아남는 행동 문장입니다.</li></ul></div>
+<div class="meta">김하늘 파트장 (메뉴 개발 담당, 9년차) · 정우석 대리 (레시피 표준화 담당, 5년차) · 배수진 사원 (메뉴 운영·분석 담당, 2년차) · 인터뷰어: AX 컨설턴트</div>
+<div class="cards"><details class="card"><summary><span class="no">인터뷰 1</span><span class="nm">1. 채널별 판매 데이터 수집</span><span class="done">1차에서 함께 함</span><span class="open">펼치기</span><span class="sub">L6: 채널별 판매 원본 확보 · 수집 데이터 완전성 확인</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>세 분이 매주 나오는 메뉴별 실적표 하나로 엮여 계시다고 들었습니다. 실적표가 언제부터 주간으로 나왔나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>올해 3월부터입니다. 작년까지는 월말에 한 번 뽑았어요. 메뉴가 예순 개를 넘어가니까 한 달씩 기다리면 늦습니다. 팀장님이 매주 보자고 하셨고, 만드는 건 수진 씨가 합니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>배수진 님, 주간으로 바뀌면서 달라진 게 있나요?</p></div><div class="qa a"><span class="who">배수진</span><p>한 달에 한 번 하던 걸 네 번 하는 거니까요. 처음 두 달은 매주 야근했어요. 지금은 좀 손에 익어서 월요일하고 화요일에 몰아서 해요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>한 주가 어떻게 시작되나요?</p></div><div class="qa a"><span class="who">배수진</span><p>월요일에 출근하면 지난주 월요일부터 일요일까지로 끊어요. 그다음에 채널마다 지난주 판매 원본을 받아요. 매장 POS 하나, 배달앱 세 개요. POS는 본사에서 한 번에 받으면 되는데, 앱 세 곳은 각각 들어가서 따로 받아야 돼요. 아이디도 다 다르고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>앱에서는 어떻게 받으세요?</p></div><div class="qa a"><span class="who">배수진</span><p>앱 관리자 화면 들어가서 기간 넣고 엑셀로 내려받아요. 세 군데가 메뉴 위치가 다 달라서 처음엔 포스트잇에 순서를 적어 붙여 놓고 했어요. 지난달에 B앱이 화면을 바꿔서 또 한참 헤맸고요. POS 쪽은 매장별로 메뉴마다 수량하고 금액이 한 줄씩 나와서 편한데, 앱은 주문 한 건이 한 줄이라 세 곳 합치면 만 줄 가까이 돼요.</p></div><div class="qa a"><span class="who">김하늘</span><p>제가 이 일 처음 맡았을 땐 배달앱이 하나였습니다. 매장 매출은 점장님들한테 주간 일보를 걷어서 봤고요. 그때도 숫자 모으는 데 월요일 꼬박 하루를 썼어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>월요일 오전에 다 받으시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>아뇨, 앱은 오전엔 못 받아요. 정산 데이터가 다음 날 오후에나 올라와요. 일요일 저녁 주문이 제일 많은데 그게 빠진 채로 받으면 의미가 없거든요. 그래서 POS만 오전에 받아 놓고, 앱은 일요일 치가 다 들어온 다음에 받아요. 오전엔 사실 기다리는 거예요.</p></div><div class="qa a"><span class="who">정우석</span><p>월요일 오전에 수진 씨한테 뭘 물어보면 답이 제일 빠릅니다. 그때 말고는 늘 바빠 보여서요.</p></div><div class="qa a"><span class="who">김하늘</span><p>주말 장사가 한 주 매출의 절반 가까이 됩니다. 일요일이 빠진 숫자는 못 씁니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>정산 데이터는 몇 시쯤 올라오나요?</p></div><div class="qa a"><span class="who">배수진</span><p>앱 쪽에서 하루 치를 밤새 정리해서 올린다고 들었어요. 제가 아는 건 월요일 세 시쯤 새로고침하면 대개 들어와 있다는 거예요. 안 들어와 있으면 네 시에 또 보고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>매장 쪽 원본은 문제가 없나요?</p></div><div class="qa a"><span class="who">배수진</span><p>다 들어왔는지가 문제예요. 매장 목록 놓고 다 올라왔는지 봐요. 마감을 안 누르고 퇴근하신 매장은 일요일 매출이 비어 있거든요. 120개를 눈으로 하나씩 세어 봐요. 백십 몇 번째쯤에서 꼭 헷갈려서, 두 번? 세 번 셀 때도 있어요.</p></div><div class="qa a"><span class="who">김하늘</span><p>올해만 매장이 여덟 곳 새로 열었습니다. 세는 숫자도 그만큼 늘었죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>비어 있는 매장은 어떻게 하세요?</p></div><div class="qa a"><span class="who">배수진</span><p>운영팀에 연락해서 점장님께 마감 좀 눌러 달라고 부탁드려요. 보통 화요일 오전엔 들어와요. 매장 하나 때문에 기다리기도 그렇고, 안 기다리기도 그렇고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>받은 파일은 어디에 두시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>받은 건 주차별로 한곳에 모아 둬요. 41주 차면 41주 차 폴더입니다. 파트장님이 몇 주 전 숫자를 찾으시면 바로 꺼내 드려야 해서요. 작년 월간 파일은 열두 개였는데, 올해는 3월부터인데도 벌써 서른 개가 넘어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>다 받고 나면 바로 합치시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>그 전에 한 번 훑어요. 채널마다 총매출을 정산 금액이랑 맞춰 봐요. 그리고 하루라도 빈 날이 있는지 봐요. 앱 하나가 수요일 치를 통째로 빼고 준 적이 있었거든요.</p></div><div class="qa a"><span class="who">정우석</span><p>그 주 기억납니다. 갈릭버거가 그 주에만 반 토막이 나서, 제가 소스 그램 수 바꾼 게 문제였나 한참 들여다봤어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>주문이 겹쳐 들어오는 경우도 있나요?</p></div><div class="qa a"><span class="who">배수진</span><p>가끔요. 같은 주문번호가 두 번 있으면 하나 지워요. 취소된 주문은 따로 표시해 둬요. 지워 버리면 나중에 정산이랑 안 맞으니까요. 뭘 고쳤는지 맨 앞장에 적어 둬요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>앞장에 적은 기록은 누가 보나요?</p></div><div class="qa a"><span class="who">배수진</span><p>거의 저만 봐요. 숫자가 이상하다고 하시면 그걸 펴서 그 주에 뭘 지웠는지 보여 드려요. 지난번에 마케팅에서 매출이 왜 줄었냐고 하셔서 찾아보니까 취소 건 스무 개를 뺀 거였어요.</p></div><div class="qa a"><span class="who">김하늘</span><p>그 메모 덕에 회의에서 한참 헛돌 뻔한 걸 넘겼습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>여기까지 한 주에 시간이 얼마나 드나요?</p></div><div class="qa a"><span class="who">배수진</span><p>받는 것만 치면 월요일 오후 두 시간쯤이에요. 이름 맞추는 거랑 붙어 있어서 따로 재기가 어려워요. 받고 이름 맞추는 데 일주일에 여섯 시간이 들어요. 화요일 오전은 거의 통째로요.</p></div><div class="qa a"><span class="who">김하늘</span><p>수진 씨 휴가 간 주에 제가 대신 받아 봤습니다. 앱마다 아이디 찾는 데만 삼십 분 걸렸어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그 주 실적표는 제때 나왔나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>그다음 주 월요일에 나왔습니다. 받는 데까지는 제가 했는데, 이름 맞추는 데서 손을 들었어요. 수진 씨가 돌아와서 마저 했고요.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 2</span><span class="nm">2. 메뉴명 기준 정합화</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>받은 원본을 합칠 때 메뉴 이름이 문제라고 들었습니다.</p></div><div class="qa a"><span class="who">배수진</span><p>네. 같은 메뉴인데 채널마다 이름이 달라요. 'BBQ치즈버거'랑 'BBQ 치즈버거'가 다른 메뉴로 잡혀요. 앱 하나는 이름 앞에 '신메뉴'를 붙여 놓고 안 떼고요. 그래서 채널 이름을 표준명 목록이랑 하나씩 맞춰 봐요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>표준명은 누가 정하나요?</p></div><div class="qa a"><span class="who">정우석</span><p>제 쪽 레시피 판본 이름을 씁니다. 레시피 문서 맨 위에 적힌 이름이 표준명이에요. 매장 POS에는 그 이름 그대로 들어가는데, 앱은 글자 수 제한이 있고 홍보 문구도 붙으니까 조금씩 달라집니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>채널 등록은 배수진 님이 하시는데도 이름이 갈라지나요?</p></div><div class="qa a"><span class="who">배수진</span><p>등록은 제가 하는데요, 앱 하나는 이름을 열다섯 자까지밖에 못 넣어요. 그래서 줄여서 넣고요. 행사 때는 앱 쪽 담당자가 이름 뒤에 '할인'을 붙였다 뗐다 해요. 그건 제가 손댈 수가 없어요.</p></div><div class="qa a"><span class="who">정우석</span><p>저희가 이름을 바꾸기도 합니다. 작년에 '스모키BBQ'를 'BBQ치즈버거'로 바꿨을 때 수진 씨 매핑표가 한 달 꼬였죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>이름은 어떻게 맞추시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>VLOOKUP 걸어 놓고 안 걸리는 것만 손으로 봐요. 그 함수는 글자가 똑같아야 찾아 주니까, 띄어쓰기 하나만 달라도 못 찾아요. 띄어쓰기만 다른 건 같은 걸로 묶고요. 세트는 버거랑 사이드로 쪼개서 잡아요. 앱마다 세트 이름 짓는 방식이 또 달라서요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>이름이 안 맞는 게 어느 정도인가요?</p></div><div class="qa a"><span class="who">배수진</span><p>지난달에 한번 세어 봤어요. 네 채널 원본 줄을 다 놓고 세어 보니까 15%쯤은 이름이 달라요. 열 줄에 한 줄 반 정도요.</p></div><div class="qa a"><span class="who">김하늘</span><p>그 숫자 듣고 놀랐습니다. 저는 몇 줄 안 되는 줄 알았어요.</p></div><div class="qa a"><span class="who">정우석</span><p>매장 쪽은 거의 다 맞을 겁니다. 틀리는 건 대부분 앱이에요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>표준명 목록은 어디서 받으시나요?</p></div><div class="qa a"><span class="who">정우석</span><p>판본이 새로 나올 때마다 제가 목록 맨 아래에 한 줄 넣어 둡니다. 문제는 수진 씨 매핑표하고 제 목록이 따로 논다는 거예요. 제가 이름 바꾼 걸 수진 씨가 실적 보다가 처음 아는 일이 생겨요.</p></div><div class="qa a"><span class="who">배수진</span><p>스모키BBQ 때가 그랬어요. 어느 주에 BBQ치즈버거가 갑자기 0개로 나와서, 저는 단종된 줄 알았어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>매핑표는 얼마나 되나요?</p></div><div class="qa a"><span class="who">배수진</span><p>지금 삼백 줄 조금 넘어요. 메뉴는 예순 개인데 채널마다, 세트마다 이름이 따로라서요. 한 번 들어간 줄은 안 지우고 쌓아 둬요. 단종된 이름이 한정판으로 다시 나오기도 해서요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>신메뉴가 나오면 어떻게 되나요?</p></div><div class="qa a"><span class="who">배수진</span><p>신메뉴 나오면 표준명을 새로 넣어요. 새로 맞춘 건 매핑표에 한 줄씩 더해요.</p></div><div class="qa a"><span class="who">김하늘</span><p>그 줄 하나 넣는 데 얼마나 걸려요?</p></div><div class="qa a"><span class="who">배수진</span><p>한 줄은 금방인데요. 근데 매핑표는 저 말고 만지는 사람이 없어요. 9월 개편 때 신메뉴가 열두 개 들어왔는데, 그 주는 이름 맞추다가 실적표가 일주일 밀렸어요. 아니, 일주일 반이요.</p></div><div class="qa a"><span class="who">김하늘</span><p>그 주 리뷰 회의는 실적표 없이 했습니다. 매핑표를 제가 열어 볼 수는 있어요. 줄은 보이는데, 왜 그렇게 묶었는지는 안 보입니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>매핑표로도 안 풀리는 이름은요?</p></div><div class="qa a"><span class="who">배수진</span><p>안 걸리는 이름은 따로 모아 둬요. 대부분 제가 봐도 뭔지 모르는 거예요. 앱에 '불고기 더블 한정'이라고 나오면 이게 지난여름 한정판인지 지금 파는 더블인지요. 그럼 대리님께 이게 어느 레시피냐고 여쭤봐요.</p></div><div class="qa a"><span class="who">정우석</span><p>판본 이력 보면 어느 레시피인지 나와요. 출시일하고 판매가만 같이 주면 거의 바로 찾습니다. 문제는 양이에요. 일주일에 마흔 건쯤 와요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그 마흔 건은 주로 어떤 이름들인가요?</p></div><div class="qa a"><span class="who">배수진</span><p>절반은 한정판이랑 행사 이름이고, 나머지가 세트예요. 감자 대신 어니언링 넣은 세트처럼 구성이 앱마다 조금씩 다르거든요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>대리님은 한 건 답하시는 데 얼마나 드나요?</p></div><div class="qa a"><span class="who">정우석</span><p>이삼 분이요. 판본 폴더 열고 출시일 맞춰 보면 됩니다. 마흔 건이면 한 시간 반쯤인데, 그게 한꺼번에 오는 게 아니라 하루 종일 흩어져서 와요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>답은 바로 가나요?</p></div><div class="qa a"><span class="who">정우석</span><p>제가 자리에 있으면요. 시식회 있는 주는 오후 내내 주방에서 지내느라 메신저를 못 봅니다. 나와 보면 질문이 열 개씩 쌓여 있어요.</p></div><div class="qa a"><span class="who">배수진</span><p>대리님 답 올 때까지 그 줄은 비워 둬요. 비워 둔 채로 합치면 합계가 안 맞으니까 다음 단계로 못 넘어가고요. 길면 이틀이요. 그 줄만 빼고 먼저 돌려 볼 수도 있는데, 그럼 나중에 또 합쳐야 해서요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>같은 질문이 되풀이되기도 하나요?</p></div><div class="qa a"><span class="who">정우석</span><p>똑같은 질문을 매주 받아요. '불고기 더블 한정'은 아마 세 번째일 겁니다. 이쯤 되면 제 이름보다 그 이름을 더 자주 봅니다.</p></div><div class="qa a"><span class="who">배수진</span><p>답 주신 대로 표준명을 붙여요. 예외로 처리한 건 이유까지 적어 두는데, 그게 그 주 파일에 적히니까 다음 주에 보면 또 처음 보는 이름 같아요. 제가 기억력이 나쁜 건가 싶기도 하고요.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 3</span><span class="nm">3. 메뉴별 실적표 작성</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>이름이 다 맞춰지면 실적표를 만드시죠. 어떻게 만드시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>표준명 기준으로 메뉴마다 수량을 더해요. 피벗 돌려서 뽑는데, 원본 모양이 매주 조금씩 달라서 지난주 걸 그대로 못 써요. 앱에서 열 순서를 바꾸거나 칸 이름을 바꾸면요. 그래서 합치는 식을 매주 새로 짜요. 메뉴마다 몇 개 팔렸는지 숫자 하나 나오면 되는 건데, 거기서 제일 오래 붙잡혀 있어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>식을 새로 짜는 데 얼마나 걸리나요?</p></div><div class="qa a"><span class="who">배수진</span><p>한 시간? 아니, 잘 되면 사십 분이요. 지난주 걸 복사해서 고치는데, 어디가 바뀌었는지 찾는 게 오래 걸려요.</p></div><div class="qa a"><span class="who">정우석</span><p>저도 원가표를 달마다 새로 짭니다. 구매팀 단가표 양식이 자꾸 바뀌어서요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>세트로 팔린 버거는 어떻게 세시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>세트 안에 든 버거도 버거 한 개로 쳐요. 아까 쪼개 둔 게 여기서 쓰여요. 사이드도 마찬가지고요. 그러면 단품으로 나간 거랑 세트로 나간 걸 따로도 볼 수 있어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>수량 말고는 무엇을 넣나요?</p></div><div class="qa a"><span class="who">배수진</span><p>매출은 채널별로 나눠서 적고요. 그다음에 전주 대비하고 매출 비중을 내요. 월간일 때 쓰던 지표를 주 단위로 바꾼 겁니다. 처음엔 신메뉴가 헷갈렸어요. 전주가 없으니까 칸이 비거든요. 지금은 거기에 '신규'라고 적어 둬요. 메뉴 예순 줄에 채널 네 칸, 지표 세 칸이라 한 장에 넣으면 글씨가 너무 작아서 두 장으로 나눕니다.</p></div><div class="qa a"><span class="who">김하늘</span><p>제가 부탁한 건 하나였습니다. 예순 개가 한눈에 보이게. 두 장으로 갈라 놓으면 앱 하나에서만 잘 팔리는 메뉴를 놓칩니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>숫자가 맞는지는 어떻게 보시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>메뉴별로 다 더한 게 채널 총매출이랑 맞아야 돼요. 안 맞으면 어디서 이름이 빠졌거나 두 번 들어간 거고, 그것도 아니면 앱 쪽 숫자가 바뀐 거예요. 정산이 화요일쯤 한 번 더 바뀌는 앱이 있거든요. 늦게 들어온 취소가 반영돼서요. 안 맞으면 원본을 처음부터 다시 받아요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>다시 받으면 처음부터 다시 하시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>이름 맞춘 건 살리는데요, 식은 다시 돌려야 해요. 반나절이요. 한 달에 두 번은 그래요.</p></div><div class="qa a"><span class="who">정우석</span><p>원가도 그래요. 단가표가 중간에 고쳐져서 오면 처음부터 다시 돌립니다. 저는 그게 한 달에 한 번인데, 수진 씨는 매주니까요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>실적표는 언제 나오게 돼 있나요?</p></div><div class="qa a"><span class="who">배수진</span><p>다 맞으면 파트장님께 넘겨요. 원래는 화요일까지예요.</p></div><div class="qa a"><span class="who">김하늘</span><p>화요일까지로 정해 놨는데, 실제로는 평균 사흘 늦게 받습니다. 금요일에 오는 주가 제일 많아요. 지난달엔 신메뉴 첫 주 숫자를 금요일에 받았어요. 그 주말에 앱 할인을 더 걸지 말지 정해야 했는데, 결국 숫자 없이 정했습니다.</p></div><div class="qa a"><span class="who">배수진</span><p>금요일 오후쯤 되면 마케팅에서 아직이냐고 물어보세요. 행사 끝난 주엔 특히요. 화요일에 드린다고 해 놓은 게 있어서, 죄송하다고 하는 게 금요일 일이에요.</p></div><div class="qa a"><span class="who">정우석</span><p>저는 그 실적표에 원가율을 다시 넣어야 해서, 금요일에 오면 제 쪽도 다음 주 월요일로 밀립니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>실적표를 받으시면 무엇부터 보시나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>전주보다 30% 넘게 움직인 메뉴부터 봅니다. 예순 개 중에 보통 대여섯 개예요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>그 대여섯 개는 어떻게 보세요?</p></div><div class="qa a"><span class="who">김하늘</span><p>행사였는지 품절이었는지부터 확인합니다.</p></div><div class="qa a"><span class="who">배수진</span><p>앱 쪽 행사는 저도 나중에 알 때가 많아요.</p></div><div class="qa a"><span class="who">김하늘</span><p>한 채널만 튀면 그 채널 사정을 따로 봅니다. 앱 하나가 첫 페이지에 걸어 주면 그 주만 두 배가 되거든요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>대여섯 개를 다 보시는 데 얼마나 걸리나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>금요일 오후 한두 시간입니다. 품절이나 행사는 금방 나와요. 이유가 안 보이는 메뉴 한두 개가 시간을 다 잡아먹습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>품절은 어떻게 아시나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>운영팀 공지를 봅니다. 공지 없이 지나가는 날도 있어서, 그럴 땐 점장님 몇 분께 직접 여쭤봐요. 앱 노출 일정은 마케팅에서 매주 받는데, 그게 늦게 오면 저도 짐작으로 적습니다.</p></div><div class="qa a"><span class="who">정우석</span><p>그 품절이 레시피 자재일 때가 있어서 파트장님이 저한테도 물어보세요. 지난달 할라피뇨 빠진 주가 그랬습니다.</p></div><div class="qa a"><span class="who">배수진</span><p>그 주는 할라피뇨 들어간 메뉴 세 개가 한꺼번에 떨어져서, 저는 처음에 제가 이름을 잘못 묶은 줄 알았어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>사정을 확인한 다음에는요?</p></div><div class="qa a"><span class="who">김하늘</span><p>한 주 반짝인지 계속 갈 건지를 봅니다. 그 메뉴 사정을 알아야 보이지, 숫자만 봐선 몰라요. 왜 움직였는지 한 줄씩 적어 둡니다. '앱 노출', '행사 종료' 이런 식으로 두세 마디요.</p></div><div class="qa a"><span class="who">배수진</span><p>그 칸은 파트장님만 쓰세요. 파트장님 안 계신 주는 그 칸이 비어서 나가요. 9월에 출장 가셨을 때 두 주 연속 비었어요. 저도 한번 써 보려고 했는데, 이게 이상한 건지 아닌지를 모르겠더라고요.</p></div><div class="qa a"><span class="who">정우석</span><p>저도 못 씁니다. 레시피를 언제 바꿨는지는 알아도, 그게 판매에 어떻게 붙었는지는 파트장님이 보셔야 압니다.</p></div></div></details><details class="card"><summary><span class="no">인터뷰 4</span><span class="nm">4. 실적 리뷰·공유</span><span class="open">펼치기</span><span class="sub">짝 하나가 맡아 L6 → L7 로 정리</span></summary><div class="body"><div class="qa q"><span class="who">컨설턴트</span><p>실적표와 메모는 어디서 이야기가 되나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>팀 리뷰 회의요. 격주 목요일입니다. 리뷰 회의가 격주라서 한 번 놓치면 2주를 기다립니다. 금요일에 실적표가 오면 바로 전날 회의가 끝난 거라, 다음 회의까지 열흘 넘게 묵어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>매주로 바꾸자는 이야기는 없었나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>나왔습니다. 팀장님이 목요일 오전마다 다른 회의가 있으셔서 격주로 남았어요. 그것도 3월에 월례에서 격주로 당긴 거고요.</p></div><div class="qa a"><span class="who">배수진</span><p>회의 없는 주에도 자료는 똑같이 만들어서 메일로만 돌려요. 답장은 거의 없어요.</p></div><div class="qa a"><span class="who">김하늘</span><p>저는 봅니다. 회의 없는 주엔 메모만 달아 두고 다음 회의로 넘겨요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>회의 자료는 누가 만드나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>회의에 올릴 메뉴를 열 개 안쪽으로 고릅니다. 고르는 건 제가 하고 자료는 수진 씨가 만들어요. 메모 붙은 것부터 넣고요, 신메뉴는 첫 달엔 무조건 올립니다. 남는 자리에 2주 넘게 떨어지는 메뉴를 넣어요.</p></div><div class="qa a"><span class="who">배수진</span><p>메뉴마다 추이 그래프하고 메모를 한 장에 붙여요. 파트장님 메모가 들어가야 끝나는 거라, 그 칸이 비어 있으면 저도 못 넘겨요. 그래프는 지난번 걸 복사해서 숫자만 바꾸는데, 회의에 올라가는 메뉴가 바뀌면 처음부터 그려요. 반나절은 걸려요.</p></div><div class="qa a"><span class="who">정우석</span><p>원가율은 이번 달 단가로 다시 넣어 드립니다. 실적표에는 작년 원가가 그대로 박혀 있는 메뉴가 꽤 있어서, 그냥 두면 잘 팔리는데 남는 게 없는 메뉴가 안 보여요. 지난 회의 때 치킨버거가 실적표엔 원가율 32%였는데 이번 달 단가로 넣으니까 38%가 나왔습니다. 그거 보고 가격 얘기가 나왔고요.</p></div><div class="qa a"><span class="who">김하늘</span><p>그 치킨버거는 다음 달에 200원 올리기로 했습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>자료는 어떻게 공유하시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>회의 전날 오후에 메일로 돌려요. 팀장님, 마케팅 두 분, 조리팀까지 여덟 분이요. 회의 끝나면 나온 얘기를 덧붙여서 다시 돌려요. 같은 자료가 두 번 나가는 셈이에요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>회의에 못 오신 분들은 내용을 어떻게 아시나요?</p></div><div class="qa a"><span class="who">배수진</span><p>두 번째로 돌리는 메일을 보세요. 조리팀은 거기서 자기 이름 붙은 줄만 찾아보신대요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>회의에서는 주로 어떤 이야기가 오가나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>메뉴 하나에 오 분씩 잡습니다. 열 개면 한 시간이에요. 마케팅은 행사를 더 걸어 보자 하고, 조리팀은 주방에서 손 많이 가는 것부터 빼자고 합니다. 가운데서 정리하는 건 제 몫이고, 마지막은 팀장님이 정하세요.</p></div><div class="qa a"><span class="who">정우석</span><p>조리팀이 빼자는 메뉴는 대개 저한테 레시피를 손봐 달라는 얘기로 바뀝니다. 회의에선 빼는 것보다 고치자는 쪽이 말하기 쉬우니까요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>회의에서 정한 건 어떻게 챙기시나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>정한 건 메뉴마다 한 줄로 적습니다. 가격을 손볼지, 레시피를 바꿀지, 판매를 접을지. 누가 언제까지인지 붙여 둡니다. 그 장은 다음 회의 자료 맨 뒤에 그대로 다시 들어가요.</p></div><div class="qa a"><span class="who">정우석</span><p>레시피 손대는 건 저한테 넘어와요. 소스를 줄이든 패티를 바꾸든 판본을 새로 내고, 원가 다시 돌리고, 매장에 알리기까지 2주는 걸립니다. 매장이 새 판본을 받았는지는 그다음 주 실적을 봐야 겨우 짐작하고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>조치가 됐는지는 언제 확인하시나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>다음 회의 첫머리에 지난번 조치부터 봅니다. 그것도 격주라서, 결과를 보는 데 또 2주예요.</p></div><div class="qa a"><span class="who">배수진</span><p>회의 전날 담당자분들께 하나씩 여쭤봐요. 됐는지 안 됐는지요. 안 된 게 절반쯤이라, 그건 그대로 다음 장에 옮겨 적어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>조치가 담당자 사정으로 미뤄지면요?</p></div><div class="qa a"><span class="who">김하늘</span><p>다음 회의로 넘어갑니다. 그럼 또 2주죠. 마케팅 행사 일정이 걸린 조치는 한 달씩 밀리기도 합니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>저실적 메뉴 하나가 처음 눈에 띄고 나서 조치가 끝나기까지는 얼마나 걸리나요?</p></div><div class="qa a"><span class="who">김하늘</span><p>안 팔리는 메뉴 하나 손대는 데 6주가 걸립니다. 처음 떨어진 걸 회의에서 보고, 한 번은 지켜봅니다. 다음 회의에서도 떨어져 있으면 그때 조치를 정하고, 그게 매장까지 내려가요. 지난봄 치즈스틱 세트가 딱 그랬어요. 3월 말에 눈에 띄었는데 판매를 접은 건 5월 초였습니다.</p></div><div class="qa a"><span class="who">배수진</span><p>그동안 매장엔 재료가 계속 남아요. 9월에 내린 메뉴 소스가 아직 몇 군데 남아 있다고 들었어요.</p></div><div class="qa a"><span class="who">정우석</span><p>그 소스는 유통기한이 석 달이라, 남은 건 폐기로 가요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>지난주 실적표는 지금 어디쯤 가 있나요?</p></div><div class="qa a"><span class="who">배수진</span><p>이름은 다 맞췄고요, 아직 대리님 답 두 개 기다리고 있어요. 이번엔 '불고기 더블 한정'은 아니고 어니언링 세트 쪽이에요. 오늘이 화요일이라 원래는 오늘 드려야 하는데요.</p></div><div class="qa a"><span class="who">정우석</span><p>그 두 개는 아침에 봤습니다. 시식회 끝나고 오후에 보내 드릴게요. 판본 이력만 찾으면 되는 거라서요.</p></div><div class="qa a"><span class="who">배수진</span><p>그럼 내일 식 돌리고, 앱 정산이 또 안 바뀌어 있으면 목요일엔 드릴 수 있을 것 같아요.</p></div><div class="qa a"><span class="who">김하늘</span><p>이번 주 목요일은 회의 없는 주입니다. 받으면 메모 달아서 다음 주 회의로 넘깁니다. 지난번에도 그렇게 넘긴 메뉴가 세 개였어요.</p></div></div></details></div>
+<div class="foot"><a class="back" href="step2.html">← 2차 실습 안내로</a></div>
+</div></body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>고객서비스 1차 실습 — 불만 내용 청취</title>
+<style>@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f8fafc;color:#1f2937;line-height:1.65;
+    font-family:"Presentation","Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;font-size:16px}
+  h1,h2,h3,.grp,.card .nm,.guide .t,.rules .t,.who,.tab,.box .nm{
+    font-family:"Paperozi","Presentation","Malgun Gothic",system-ui,sans-serif}
+  .wrap{max-width:680px;margin:0 auto;padding:16px 18px 60px}
+  .wide .wrap{max-width:1560px}
+  a{color:#1d4ed8;text-decoration:none}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;
+    color:#4b5563;background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:6px 14px;margin:4px 0 14px}
+  .chip{display:inline-block;border-radius:6px;color:#fff;font-size:12px;font-weight:700;padding:2px 8px}
+  h1{font-size:23px;margin:6px 0 2px;line-height:1.35}
+  .meta{color:#6b7280;font-size:14px;margin-bottom:14px}
+  .guide{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px 16px;margin:14px 0 20px}
+  .guide .t{font-weight:800;font-size:14px;margin-bottom:6px}
+  .guide ul,.guide ol{margin:0;padding-left:18px;font-size:14px}
+  .guide li{margin:3px 0;word-break:keep-all}
+  .guide b{color:#b45309}
+  h2{font-size:18px;margin:26px 0 8px;padding-left:10px;border-left:4px solid #cbd5e1}
+  .qa{margin:12px 0}
+  .who{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+  .q .who{color:#6b7280}
+  .a .who{color:#1d4ed8}
+  .q p,.a p{margin:0;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 14px}
+  .a p{background:#eff6ff;border-color:#bfdbfe}
+  .foot{margin-top:34px;padding-top:14px;border-top:1px solid #e5e7eb;text-align:center}
+  .lead{color:#4b5563;font-size:15px;margin:4px 0 18px}
+  .rules{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 18px;margin-bottom:22px}
+  .rules .t{font-weight:800;margin-bottom:8px}
+  .rules ol,.rules ul{margin:0;padding-left:20px;font-size:14.5px}
+  .rules li{margin:6px 0;word-break:keep-all}
+  .grp{font-size:16px;font-weight:800;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+  .card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;margin:10px 0;color:inherit}
+  .card .nm{font-weight:800;font-size:16.5px}
+  .card .who2{color:#6b7280;font-size:14px;margin-top:2px}
+  .card .l5{color:#92400e;font-size:13px;margin-top:6px;word-break:keep-all}
+  .card .go{float:right;color:#9ca3af;font-size:18px}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+  .links a{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+  .tab{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;color:#fff;opacity:.55}
+  .tab.on{opacity:1;box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor}
+  .panel{display:none}
+  .panel.on{display:block}
+
+  .pyr{margin:10px 0 30px}
+  .pyr .row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+  .pyr .grps{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:flex-start}
+  .pyr .g3{flex:1 1 300px;min-width:0;max-width:480px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .pyr .kids{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .box{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1.5px solid #cbd5e1;border-radius:10px;padding:7px 10px;font-size:14px;line-height:1.4;word-break:keep-all;min-width:0}
+  .box .lv{flex:none;border-radius:6px;color:#fff;font-size:11px;font-weight:800;padding:1px 6px;margin-top:2px}
+  .box.l1,.box.l2{font-weight:800;font-size:15px;min-width:min(220px,100%);justify-content:center}
+  .box.l3{font-weight:800;background:#f0fdf4}
+  .box.l4{background:#fffbeb}
+  .box.l4.hot{border:3px solid #a16207;background:#fef3c7;font-weight:800}
+  .box.l5{background:#faf5ff;font-size:13px;margin-left:22px}
+  .box.l5.star{border:2.5px solid #9333ea;font-weight:800}
+  .pyr .l5s{display:flex;flex-direction:column;gap:4px;margin:4px 0 2px}
+  .ans .l6s{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-top:10px}
+  .ans .l6g{flex:1 1 320px;min-width:0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px}
+  .ans .box.l6{background:#fdf2f8;font-weight:800}
+  .ans .out{font-size:12.5px;color:#9d174d;margin:4px 0 6px 4px}
+  .ans .l7{display:flex;gap:8px;align-items:flex-start;border:1.5px solid #fecaca;background:#fff;border-radius:10px;padding:6px 10px;margin:6px 0;font-size:13.5px}
+  .ans .ev{display:block;color:#6b7280;font-size:12px;margin-top:2px}
+  .ans .wrong{background:#f1f5f9;border:1px dashed #94a3b8;border-radius:10px;padding:8px 12px;font-size:13px;margin-top:10px}
+  .ans .wrong b{color:#475569}
+
+  .tabs.v2{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0 18px}
+  .tabs.v2 .tab{opacity:1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;
+    padding:9px 8px;border-radius:10px;font-size:15px;line-height:1.2;word-break:keep-all;cursor:pointer;
+    background:#fff;color:var(--c);border:2px solid var(--c);box-shadow:0 3px 0 #cbd5e1;
+    transition:transform .08s,box-shadow .08s,background .12s}
+  .tabs.v2 .tab:hover{background:color-mix(in srgb,var(--c) 10%,#fff)}
+  .tabs.v2 .tab:active{transform:translateY(2px);box-shadow:0 1px 0 #cbd5e1}
+  .tabs.v2 .tab.on{background:var(--c);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.28)}
+  .pyr .top{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 16px;padding-bottom:14px;border-bottom:1px dashed #cbd5e1}
+  .pyr .vc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .pyr .vc .l2s{display:flex;flex-direction:row;gap:6px;padding:6px 6px 0;margin:0 6px;border-top:2px solid #e5e7eb}
+  .pyr .vc .box{min-width:0;justify-content:center;font-size:14px}
+  .pyr .vc .l2s .box{flex:1 1 0}
+  .pyr .vc .box.l1{font-size:15px}
+  .pyr .vc .box.own{border-width:2.5px;border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 18%,transparent)}
+  .pyr .vc a.box{color:inherit;cursor:pointer;box-shadow:0 2px 0 #cbd5e1}
+  .pyr .vc a.box:hover{border-color:#94a3b8;background:#fff}
+  .pyr .vc a.box:active{transform:translateY(1px);box-shadow:none}
+  .box.dim{color:#9ca3af;background:#f3f4f6;border-color:#e5e7eb;font-weight:600}
+  .box.dim .lv{background:#b0b7c3!important}
+  .pyr .vc.dim .l2s{border-top-color:#eef0f3}
+  .pyr .hint{font-size:12.5px;color:#6b7280;text-align:center;margin:-8px 0 14px}
+  @media (max-width:640px){
+    .tabs.v2{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .tabs.v2 .tab{font-size:14px;padding:8px 4px;min-height:40px}
+    .pyr .top{flex-direction:column;align-items:stretch}
+    .pyr .vc{flex:1 1 auto}
+    .pyr .vc .box{font-size:13px;padding:6px 8px}
+    .pyr .vc a.box.l2{min-height:42px;align-items:center}
+    .pyr .vc .box.l1{font-size:14px}
+  }
+
+  .path{margin:4px 0 12px}
+  .path .row{margin:0 0 6px}
+  .path .row .box{flex:0 1 auto;margin:0}
+  .path .row .box.own{border-width:2.5px;font-weight:800}
+  .path .row .box.l1,.path .row .box.l2{min-width:0;font-size:14.5px}
+  .path .row .box.l1.own,.path .row .box.l2.own{border-color:var(--c)}
+  .path .row .box.l3.own{border-color:#16a34a}
+  .path .row .box.l4.own{border-color:#a16207}
+  .box.l5.cur{border:2.5px solid #9333ea;background:#f3e8ff;font-weight:800}
+  .path .chain{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:10px}
+  .path .chain .arrow{color:#94a3b8;font-weight:800}
+  .path .chain .box{flex:0 1 auto}
+  .pyr .vc .box.own{box-shadow:none}
+  h1+.path{margin-top:0}
+  /* 트리 */
+  .tree{margin:14px auto 26px;max-width:960px}
+  .grp.sep{border-top:1px solid #e5e7eb;padding-top:16px;margin-top:26px}
+  .tree .root{display:flex;justify-content:center}
+  .tree .root .box{min-width:0;margin:0;font-weight:800}
+  .tree .l6cols{display:flex;gap:18px;align-items:flex-start;justify-content:center;position:relative;padding-top:18px}
+  .tree .l6col{flex:1 1 0;min-width:0;position:relative;padding-top:18px}
+  .tree .l6col::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .l6col::after{content:"";position:absolute;top:0;height:2px;background:#94a3b8;left:0;right:0}
+  .tree .l6col:first-child::after{left:50%}
+  .tree .l6col:last-child::after{right:50%}
+  .tree .l6col:only-child::after{display:none}
+  .tree .l6cols::before{content:"";position:absolute;left:50%;top:0;width:2px;height:18px;background:#94a3b8}
+  .tree .box.l6{background:#fdf2f8;font-weight:800;justify-content:flex-start;min-height:42px}
+  .tree .l7s{position:relative;margin:8px 0 0 22px;padding-left:16px;display:flex;flex-direction:column;gap:6px}
+  .tree .l7s::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:#94a3b8}
+  .tree .l7{position:relative}
+  .tree .l7::before{content:"";position:absolute;left:-16px;top:19px;width:16px;height:2px;background:#94a3b8}
+  .tree .l7:last-child::after{content:"";position:absolute;left:-17px;top:21px;bottom:-8px;width:4px;background:#f8fafc}
+  .tree .l7 .box{min-height:38px;font-size:13.5px}
+  .tree .l7 .box.l7{background:#fff;border-color:#fecaca}
+  .tree .box.blank{background:#fff;border-style:dashed;color:#cbd5e1}
+  .tree .box.blank .nm{flex:1;min-height:18px}
+  .tree .out{font-size:12.5px;color:#9d174d;margin:4px 0 0 4px}
+  /* 근거 (?) */
+  .ev{display:none;font-size:12.5px;color:#475569;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:5px 9px;margin:4px 0 0 4px;word-break:keep-all}
+  .ev b{color:#1f2937}
+  .show-ev .ev{display:block}
+  .qbtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    border:2px solid #475569;background:#fff;color:#475569;font-weight:800;font-size:16px;cursor:pointer;margin-left:8px;vertical-align:middle}
+  .qbtn.on{background:#475569;color:#fff}
+  .qrow{display:flex;align-items:center;gap:8px;margin:14px 0 6px;font-weight:800;font-size:15px}
+  .qrow .hint2{font-weight:500;color:#6b7280;font-size:13px}
+  /* 병목·지연·낭비 마킹 */
+  .bdw{display:inline-block;flex:none;border-radius:6px;font-size:11px;font-weight:800;padding:1px 6px;margin-left:6px;color:#fff;letter-spacing:.02em}
+  .bdw-B{background:#dc2626}.bdw-D{background:#ca8a04}.bdw-W{background:#2563eb}
+  .box.has-B{border-color:#dc2626;background:#fee2e2}
+  .box.has-D{border-color:#ca8a04;background:#fef9c3}
+  .box.has-W{border-color:#2563eb;background:#dbeafe}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:#4b5563;margin:4px 0 14px}
+  .legend span{display:inline-flex;align-items:center;gap:4px}
+  /* 카드(2차) */
+  .cards{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+  details.card{padding:0;overflow:hidden}
+  details.card summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  details.card summary::-webkit-details-marker{display:none}
+  details.card summary .no{flex:none;border-radius:8px;background:#1f2937;color:#fff;font-weight:800;font-size:13px;padding:3px 9px}
+  details.card summary .nm{font-weight:800;font-size:16px}
+  details.card summary .sub{color:#6b7280;font-size:13.5px;width:100%;word-break:keep-all}
+  details.card summary .done{background:#dcfce7;color:#166534;border-radius:999px;font-size:12px;font-weight:800;padding:2px 9px}
+  details.card summary .open{margin-left:auto;color:#9ca3af;font-size:13px}
+  details.card[open] summary{border-bottom:1px solid #e5e7eb;background:#f8fafc}
+  details.card .body{padding:6px 16px 14px}
+  .step{display:inline-block;background:#1f2937;color:#fff;border-radius:999px;font-size:12px;font-weight:800;padding:2px 10px;margin-bottom:6px}
+  @media (max-width:640px){
+    /* 경로: 들여쓰기 목록 — 줄마다 한 단씩 들여 쓰고 왼쪽 레일·꺾은선으로 "위 줄의 자식"을 보인다 */
+    .path .row{justify-content:flex-start;gap:6px;position:relative;margin:0 0 2px;padding:3px 0 3px 14px}
+    .path .row .box{font-size:13px;padding:5px 8px}
+    .path .row .box.l1,.path .row .box.l2{font-size:13.5px}
+    .path .row.r1{padding-left:0}
+    .path .row .box.own,.path .row .box.cur{order:-1}   /* 자기 상자를 줄 맨 앞에 — 꺾은선이 그 상자에 닿는다 */
+    .path .row.r3{margin-left:14px}.path .row.r4{margin-left:28px}.path .row.r5{margin-left:42px}
+    .path .row:not(.r1)::before{content:"";position:absolute;left:0;top:-8px;width:2px;height:28px;background:#cbd5e1}
+    .path .row:not(.r1)::after{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:#cbd5e1}
+    .tree .l6cols{flex-direction:column;gap:14px;padding-top:0}
+    .tree .l6cols::before{display:none}
+    .tree .l6col{padding-top:0;padding-left:18px}
+    .tree .l6col::before{left:6px;top:-14px;height:calc(100% + 14px);width:2px}
+    .tree .l6col::after{top:21px;left:6px;right:auto;width:12px;height:2px}
+    .tree .l6col:first-child::after,.tree .l6col:last-child::after{left:6px;right:auto}
+    .tree .l6col:last-child::before{height:35px}
+    .tree .l7s{margin-left:14px}
+  }
+</style>
+</head>
+<body><div class="wrap">
+<a class="back" href="index.html">← 1차 실습 안내로</a>
+<span class="step">1차 실습 · 고객서비스</span>
+<h1>"[L5]불만 내용 청취"을 L6, L7 으로 분해합니다.</h1>
+<div class="path pyr" style="--c:#0e7490"><div class="row r1"><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">시장·고객 이해</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">상품 개발</span></div><div class="box l1 dim"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">공급·생산</span></div><div class="box l1 own"><span class="lv" style="background:#1e3a8a">L1</span><span class="nm">판매·서비스</span></div></div><div class="row r2"><div class="box l2 own"><span class="lv" style="background:#0e7490">L2</span><span class="nm">고객서비스</span></div><div class="box l2 dim"><span class="lv" style="background:#0e7490">L2</span><span class="nm">매장관리</span></div></div><div class="row r3"><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">주문 접수</span></div><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">서빙·전달</span></div><div class="box l3 own"><span class="lv" style="background:#15803d">L3</span><span class="nm">고객 응대</span></div><div class="box l3 dim"><span class="lv" style="background:#15803d">L3</span><span class="nm">매장 환경 관리</span></div></div><div class="row r4"><div class="box l4 own"><span class="lv" style="background:#a16207">L4</span><span class="nm">컴플레인 응대</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">환불·교환 처리</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">리뷰 답글 작성</span></div><div class="box l4 dim"><span class="lv" style="background:#a16207">L4</span><span class="nm">고객 문의 전화 응대</span></div></div><div class="row r5"><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">불만 내용 청취</span></div><div class="box l5 dim"><span class="lv" style="background:#9333ea">L5</span><span class="nm">현장 보상 결정</span></div><div class="box l5 dim"><span class="lv" style="background:#9333ea">L5</span><span class="nm">컴플레인 기록·이관</span></div><div class="box l5 dim"><span class="lv" style="background:#9333ea">L5</span><span class="nm">후속 조치 확인</span></div></div></div>
+<div class="grp sep">L5를 L6, L7으로 분해해주세요</div>
+<div class="tree"><div class="root"><div class="box l5 cur"><span class="lv" style="background:#9333ea">L5</span><span class="nm">불만 내용 청취</span></div></div><div class="l6cols"><div class="l6col"><div class="box l6"><span class="lv" style="background:#be185d">L6</span><span class="nm">불만 내용 확인·분류</span></div><div class="l7s"><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7"><span class="lv" style="background:#b91c1c">L7</span><span class="nm">불만이 나온 주문을 찾아 특정한다</span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div></div></div><div class="l6col"><div class="box l6 blank"><span class="lv" style="background:#be185d">L6</span><span class="nm"></span></div><div class="l7s"><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7"><span class="lv" style="background:#b91c1c">L7</span><span class="nm">조리한 직원에게 당시 상황을 묻는다</span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div><div class="l7"><div class="box l7 blank"><span class="lv" style="background:#b91c1c">L7</span><span class="nm"></span></div></div></div></div></div></div>
+<div class="grp sep">인터뷰</div>
+<div class="meta">임세라 매니저 (강남점 홀 주문·서빙 담당, 5년차) · 곽준영 (강남점 배달·포장 담당, 2년차) · 문혜정 대리 (본사 CS팀 고객 응대 담당, 6년차) · 인터뷰어: AX 컨설턴트</div>
+<h2 id="l5-1">1. 불만 내용 청취</h2><div class="qa q"><span class="who">컨설턴트</span><p>오늘은 컴플레인 한 건이 들어와서 끝날 때까지를 세 분과 같이 따라가 보려고 합니다. 강남점에는 불만이 어디로 들어오나요?</p></div><div class="qa a"><span class="who">임세라</span><p>세 군데요. 홀에서 직접 말씀하시는 거, 배달앱 메시지로 오는 거, 본사 대표번호로 걸려 와서 내려오는 거. 세 군데 다 합치면 한 달에 180건쯤 돼요. 하루로 치면 여섯 건입니다.</p></div><div class="qa a"><span class="who">문혜정</span><p>스물여덟 개 매장 중에 강남점이 제일 많아요. 손님이 제일 많은 매장이니까 그럴 만하죠. 저희 주간 집계에서 늘 맨 위에 있습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>홀에서 손님이 불만을 말씀하시면 어떻게 하세요?</p></div><div class="qa a"><span class="who">임세라</span><p>일단 말씀을 끊지 않고 끝까지 들어요. 중간에 &quot;그게 아니라&quot; 하는 순간 일이 두 배가 됩니다. 다 들으면 어느 주문인지부터 찾아요. 영수증을 갖고 계시면 금방인데, 없으시면 몇 시쯤 뭘 드셨는지 여쭤보고 주문 내역을 한 건씩 넘겨 가며 찾아요. 점심 피크에는 한 시간에 주문이 쉰 건 넘게 찍히거든요. 그 안에서 치즈버거 세트 하나 찾는 거예요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>찾고 나면 바로 응대에 들어가시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>메모부터 합니다. 카운터 밑에 접수 메모 묶음이 있어요. 음식, 대기, 직원, 배달 네 가지 중에 하나로 나눠서 적어요. 손님 앞에서 쓰면 기분 나빠하셔서, 응대 끝나고 바로 써요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>네 가지 중 어디에 넣을지 애매한 건 없나요?</p></div><div class="qa a"><span class="who">임세라</span><p>많죠. 버거가 식어서 왔다, 이건 음식이에요, 배달이에요? 저는 배달로 넣고 점장님은 음식으로 넣으세요. 그날 누가 메모했느냐에 따라 갈립니다.</p></div><div class="qa a"><span class="who">곽준영</span><p>저는 헷갈리면 그냥 배달에 넣어요. 제 쪽에서 생긴 일 같아서요. 그게 맞는 건지는, 잘 모르겠어요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>배달 손님 불만은 어떻게 들어오나요?</p></div><div class="qa a"><span class="who">곽준영</span><p>앱으로 온 불만 메시지는 제가 읽어요. 태블릿 세 대 돌면서 메시지함을 하나씩 열어 봐요. 메시지는 사실 틈날 때만 봐요. 주문은 소리가 나는데 메시지는 소리가 안 나거든요. 점심 피크에 온 걸 세 시 넘어서 보는 날도 있어요. 그땐 손님이 벌써 별점 하나 남기고 가신 뒤고요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>읽고 나서는 어떻게 하세요?</p></div><div class="qa a"><span class="who">곽준영</span><p>매니저님 메모 묶음에 같이 적어요. 제가 처음 왔을 땐 앱이 두 개였는데, 그때도 저는 받은 말을 종이에 옮겼어요. 앱이 하나 늘었을 땐 들여다볼 데가 한 군데 더 생겼죠. 메시지를 처음 놓쳐 본 것도 그 무렵이에요.</p></div><div class="qa a"><span class="who">문혜정</span><p>그 메모가 저희 쪽 접수랑 겹칠 때가 많아요. 같은 분이 매장에서 한 번, 앱에서 한 번, 저희 대표번호로 또 한 번 하세요. 따로 접수하면 저희 집계에서는 세 건이 됩니다. 실제로는 한 분인데요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>본사로 걸려 온 전화는 매장에 어떻게 전해지나요?</p></div><div class="qa a"><span class="who">문혜정</span><p>통화 요지를 정리해서 매장 공용 메일로 보냅니다. 오후 다섯 시에 하루 치를 한 번에 보내요. 위생 건만 예외로 바로 전화드리고요.</p></div><div class="qa a"><span class="who">임세라</span><p>그래서 같은 건이면 한 장으로 묶어요. 성함이나 전화번호 끝자리를 보고요. 메일은 저녁에 오는데 저는 다음 날 아침에야 열어 보니까, 그때 가서 어제 메모를 뒤져 묶는 날도 있습니다.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>메모를 하고 나면 무엇을 확인하시나요?</p></div><div class="qa a"><span class="who">임세라</span><p>사실 확인이요. 저는 이게 제일 중요하다고 봐요. 전표를 꺼내서 손님 말씀이랑 하나씩 맞춰 봐요. 피클 빼 달라고 하셨는데 전표에 그게 없으면 카운터에서 잘못 받은 거고, 전표에 있으면 주방이 놓친 거죠.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>주방 쪽은 어떻게 확인하세요?</p></div><div class="qa a"><span class="who">임세라</span><p>그 시간에 그릴 본 친구한테 물어봐요. &quot;열두 시 반에 패티 몇 장 올렸어?&quot; 이런 식으로요. 피크 때 일은 기억 못 하는 친구가 많아서, 주방 모니터에 남은 시간을 같이 봅니다.</p></div><div class="qa a"><span class="who">곽준영</span><p>배달은 제가 봐요. 몇 시에 나갔는지는 제 노트에 다 있어요. 식어서 왔다고 하시면 나간 시각부터 보는데, 저희가 늦게 넘긴 건지 기사님이 돌아서 가신 건지가 거기서 갈려요. 아, 노트를 깜빡한 날은 앱에 찍힌 픽업 시간으로 봐요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>확인해 보면 손님 말씀과 기록이 다른 경우도 있나요?</p></div><div class="qa a"><span class="who">임세라</span><p>꽤 자주요. 하루 여섯 건이면 한 건은 손님이 기억하시는 거랑 전표가 다릅니다. 그렇다고 전표를 내밀진 않아요. 따지는 것처럼 보이거든요. 저만 알고 있다가 보상 정할 때 참고하죠.</p></div><div class="qa a"><span class="who">곽준영</span><p>배달은 사진을 보내 주시는 분이 많아서 그나마 나아요. 봉투 사진에 라벨이 찍혀 있으면 몇 번 주문인지 바로 나오거든요. 사진이 없으면, 음, 저도 매니저님처럼 하나씩 찾아요.</p></div><div class="qa q"><span class="who">컨설턴트</span><p>확인한 내용은 어디에 남기세요?</p></div><div class="qa a"><span class="who">임세라</span><p>처음 메모 뒷면에요. 맞는 거랑 아직 모르는 거를 나눠서 적어 둬요. 모르는 걸 아는 것처럼 써 놓으면 나중에 본사에서 꼭 다시 물어보시거든요.</p></div><div class="qa a"><span class="who">문혜정</span><p>매니저님이 올리실 때 확인된 거, 모르는 거를 나눠 적어 주시면 저는 그것부터 봅니다. 그게 비어 있으면 매장에 전화를 한 번 더 해야 하니까요.</p></div>
+<div class="foot"><a class="back" href="index.html">← 1차 실습 안내로</a></div>
+</div></body>
+</html>

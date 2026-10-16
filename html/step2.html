@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BigBite STATIK 2차 실습</title>
+<style>@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f8fafc;color:#1f2937;line-height:1.65;
+    font-family:"Presentation","Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;font-size:16px}
+  h1,h2,h3,.grp,.card .nm,.guide .t,.rules .t,.who,.tab,.box .nm{
+    font-family:"Paperozi","Presentation","Malgun Gothic",system-ui,sans-serif}
+  .wrap{max-width:680px;margin:0 auto;padding:16px 18px 60px}
+  .wide .wrap{max-width:1560px}
+  a{color:#1d4ed8;text-decoration:none}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;
+    color:#4b5563;background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:6px 14px;margin:4px 0 14px}
+  .chip{display:inline-block;border-radius:6px;color:#fff;font-size:12px;font-weight:700;padding:2px 8px}
+  h1{font-size:23px;margin:6px 0 2px;line-height:1.35}
+  .meta{color:#6b7280;font-size:14px;margin-bottom:14px}
+  .guide{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px 16px;margin:14px 0 20px}
+  .guide .t{font-weight:800;font-size:14px;margin-bottom:6px}
+  .guide ul,.guide ol{margin:0;padding-left:18px;font-size:14px}
+  .guide li{margin:3px 0;word-break:keep-all}
+  .guide b{color:#b45309}
+  h2{font-size:18px;margin:26px 0 8px;padding-left:10px;border-left:4px solid #cbd5e1}
+  .qa{margin:12px 0}
+  .who{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+  .q .who{color:#6b7280}
+  .a .who{color:#1d4ed8}
+  .q p,.a p{margin:0;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 14px}
+  .a p{background:#eff6ff;border-color:#bfdbfe}
+  .foot{margin-top:34px;padding-top:14px;border-top:1px solid #e5e7eb;text-align:center}
+  .lead{color:#4b5563;font-size:15px;margin:4px 0 18px}
+  .rules{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 18px;margin-bottom:22px}
+  .rules .t{font-weight:800;margin-bottom:8px}
+  .rules ol,.rules ul{margin:0;padding-left:20px;font-size:14.5px}
+  .rules li{margin:6px 0;word-break:keep-all}
+  .grp{font-size:16px;font-weight:800;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+  .card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;margin:10px 0;color:inherit}
+  .card .nm{font-weight:800;font-size:16.5px}
+  .card .who2{color:#6b7280;font-size:14px;margin-top:2px}
+  .card .l5{color:#92400e;font-size:13px;margin-top:6px;word-break:keep-all}
+  .card .go{float:right;color:#9ca3af;font-size:18px}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+  .links a{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+  .tab{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;color:#fff;opacity:.55}
+  .tab.on{opacity:1;box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor}
+  .panel{display:none}
+  .panel.on{display:block}
+</style>
+</head>
+<body><div class="wrap">
+<a class="back" href="../index.html">← BigBite</a>
+<span class="step">2차 실습 · 짝</span>
+<h1>나머지 L5 세 개를 짝끼리 분해하기</h1>
+<p class="lead">같은 도메인의 그룹 인터뷰에서 아직 다루지 않은 L5 세 개를, <b>두 명씩 짝</b>을 지어 하나씩 맡습니다.</p>
+<div class="rules">
+<div class="t">진행</div>
+<ol>
+<li>테이블이 맡은 도메인 링크를 엽니다. 인터뷰 네 토막이 카드로 있고, 1번은 1차에서 함께 한 것입니다.</li>
+<li>짝마다 인터뷰 2·3·4 가운데 하나를 맡아, <b>앞에서 했던 것처럼</b> L6 → L7 로 정리합니다. 카드를 누르면 인터뷰가 펼쳐집니다.</li>
+<li>6명이면 3짝. 4명이면 한 짝이 둘을, 8명이면 두 짝이 같은 것을 맡아 결과를 맞대 봅니다.</li>
+<li>모범답안은 없습니다. 끝나면 테이블에서 서로 결과를 돌려 봅니다.</li>
+</ol>
+</div>
+<div class="grp">도메인별 그룹 인터뷰 링크</div>
+<a class="card" href="step2-menu.html"><span class="go">›</span><div class="grp" style="margin:0 0 4px"><span class="chip" style="background:#1e3a8a">상품기획</span></div><div class="nm">메뉴 운영 관리 › 판매 실적 분석</div><div class="who2">2차 · 그룹 인터뷰 4토막 · 김하늘 파트장 · 정우석 대리 · 배수진 사원</div></a><a class="card" href="step2-supply.html"><span class="go">›</span><div class="grp" style="margin:0 0 4px"><span class="chip" style="background:#a16207">자재조달</span></div><div class="nm">구매 › 일일 발주 확정</div><div class="who2">2차 · 그룹 인터뷰 4토막 · 오세훈 과장 · 한지민 주임 · 노태식 대리</div></a><a class="card" href="step2-kitchen.html"><span class="go">›</span><div class="grp" style="margin:0 0 4px"><span class="chip" style="background:#b91c1c">조리생산</span></div><div class="nm">전처리 › 일일 준비량 산정</div><div class="who2">2차 · 그룹 인터뷰 4토막 · 최영호 주임 · 윤가희 · 서동민 과장</div></a><a class="card" href="step2-service.html"><span class="go">›</span><div class="grp" style="margin:0 0 4px"><span class="chip" style="background:#0e7490">고객서비스</span></div><div class="nm">고객 응대 › 컴플레인 응대</div><div class="who2">2차 · 그룹 인터뷰 4토막 · 임세라 매니저 · 곽준영 · 문혜정 대리</div></a><a class="card" href="step2-mkt.html"><span class="go">›</span><div class="grp" style="margin:0 0 4px"><span class="chip" style="background:#15803d">마케팅</span></div><div class="nm">프로모션 기획 › 쿠폰·할인 설정</div><div class="who2">2차 · 그룹 인터뷰 4토막 · 백지훈 사원 · 유가온 과장 · 신도현 대리</div></a><a class="card" href="step2-store.html"><span class="go">›</span><div class="grp" style="margin:0 0 4px"><span class="chip" style="background:#be185d">매장관리</span></div><div class="nm">인력 관리 › 근무 스케줄 편성</div><div class="who2">2차 · 그룹 인터뷰 4토막 · 홍서율 부점장 · 박민수 점장 · 이승연 과장</div></a>
+</div></body>
+</html>
